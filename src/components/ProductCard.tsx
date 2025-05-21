@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, Package } from "lucide-react";
 
 interface ProductCardProps {
   imageUrl: string;
@@ -19,29 +20,51 @@ const ProductCard = ({ imageUrl, name, brand, category, status, date }: ProductC
     EXPIRED: "bg-amber-500 hover:bg-amber-600",
   };
 
+  const statusIcons = {
+    PASS: <Star className="h-4 w-4" />,
+    FAIL: <Star className="h-4 w-4" />,
+    EXPIRED: <Package className="h-4 w-4" />,
+  };
+
   return (
-    <Card className="overflow-hidden flex flex-col items-center p-6 transition-all hover:shadow-md">
-      <div className="w-full flex justify-center mb-4">
+    <Card className="overflow-hidden transition-all hover:shadow-lg border-gray-200">
+      {/* Product Image Container */}
+      <div className="relative h-48 bg-gray-50 p-4 flex items-center justify-center">
+        <div className="absolute top-2 right-2">
+          <Badge className={`${statusColors[status]} px-3 py-1 text-white flex items-center gap-1`}>
+            {statusIcons[status]} {status}
+          </Badge>
+        </div>
         <img 
           src={imageUrl} 
           alt={name}
-          className="h-32 object-contain"
+          className="h-full object-contain mix-blend-multiply"
         />
       </div>
       
-      <h3 className="font-medium text-lg text-center mb-1">{name}</h3>
-      <p className="text-sm text-muted-foreground mb-1">{brand}</p>
-      <p className="text-xs text-muted-foreground mb-4">{category}</p>
-      
-      <Badge className={`${statusColors[status]} px-6 py-1 text-white`}>
-        {status}
-      </Badge>
-      
-      {date && (
-        <p className="text-xs text-muted-foreground mt-2">
-          Certified on: {date}
-        </p>
-      )}
+      <CardContent className="p-4">
+        {/* Brand */}
+        <p className="text-xs text-muted-foreground mb-1">{brand}</p>
+        
+        {/* Product Name */}
+        <h3 className="font-medium text-lg line-clamp-2 min-h-[3.5rem]">{name}</h3>
+        
+        {/* Category */}
+        <div className="mt-2 flex items-center">
+          <Badge variant="outline" className="text-xs font-normal">
+            {category}
+          </Badge>
+        </div>
+        
+        {/* Date */}
+        {date && (
+          <div className="mt-3 pt-3 border-t border-gray-100">
+            <p className="text-xs text-muted-foreground flex items-center">
+              Certified on: <span className="ml-1 font-medium">{date}</span>
+            </p>
+          </div>
+        )}
+      </CardContent>
     </Card>
   );
 };

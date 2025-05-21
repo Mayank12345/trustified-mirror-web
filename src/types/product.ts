@@ -7,4 +7,6 @@ export type ProductType = {
   imageUrl: string;
   status: 'PASS' | 'FAIL' | 'EXPIRED';
   date: string;
+  description?: string;
+  rating?: number;
 };

@@ -11,17 +11,21 @@ interface SearchBarProps {
 
 const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
   return (
-    <div className="flex w-full gap-2 relative">
-      <Input 
-        type="text" 
-        placeholder="Search products, brands, categories..." 
-        className="h-12 pl-4 pr-12 rounded-md flex-1"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+    <div className="flex gap-2 w-full max-w-md">
+      <div className="relative flex-1">
+        <Input 
+          type="text" 
+          placeholder="Search products..." 
+          className="w-full h-12 pr-12 rounded-md border-gray-300 focus:border-primary"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <Button 
         variant="default" 
-        className="bg-green-500 hover:bg-green-600 h-12 w-12 flex items-center justify-center rounded-md absolute right-0"
+        size="icon"
+        className="h-12 w-12 bg-primary hover:bg-primary/90"
+        aria-label="Search"
       >
         <Search size={20} />
       </Button>

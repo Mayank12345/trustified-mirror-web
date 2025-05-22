@@ -3,9 +3,11 @@ import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, X, Package } from "lucide-react";
+import { Check, X, Package, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
+  id: number;
   imageUrl: string;
   name: string;
   brand: string;
@@ -14,7 +16,7 @@ interface ProductCardProps {
   date?: string;
 }
 
-const ProductCard = ({ imageUrl, name, brand, category, status, date }: ProductCardProps) => {
+const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: ProductCardProps) => {
   const statusColors = {
     PASS: "bg-green-500 text-white",
     FAIL: "bg-red-500 text-white",
@@ -65,9 +67,12 @@ const ProductCard = ({ imageUrl, name, brand, category, status, date }: ProductC
         
         {/* Action Button */}
         <Button 
-          className="w-full bg-gray-900 hover:bg-gray-800 text-white"
+          className="w-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center gap-2"
+          asChild
         >
-          View Details
+          <Link to={`/product/${id}`}>
+            <Eye className="h-4 w-4" /> View Details
+          </Link>
         </Button>
       </CardContent>
     </Card>

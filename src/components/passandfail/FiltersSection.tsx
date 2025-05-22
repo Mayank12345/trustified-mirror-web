@@ -25,7 +25,7 @@ const FiltersSection = ({
           value={selectedCategory}
           onValueChange={setSelectedCategory}
         >
-          <SelectTrigger className="h-12">
+          <SelectTrigger className="h-12 bg-white">
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
@@ -44,7 +44,7 @@ const FiltersSection = ({
           value={activeFilter}
           onValueChange={(value: 'PASS' | 'FAIL' | 'EXPIRED' | 'ALL') => setActiveFilter(value)}
         >
-          <SelectTrigger className="h-12">
+          <SelectTrigger className="h-12 bg-white">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>

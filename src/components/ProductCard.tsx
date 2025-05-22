@@ -2,7 +2,7 @@
 import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Package } from "lucide-react";
+import { Star, Check, X, Package } from "lucide-react";
 
 interface ProductCardProps {
   imageUrl: string;
@@ -21,25 +21,27 @@ const ProductCard = ({ imageUrl, name, brand, category, status, date }: ProductC
   };
 
   const statusIcons = {
-    PASS: <Star className="h-4 w-4" />,
-    FAIL: <Star className="h-4 w-4" />,
+    PASS: <Check className="h-4 w-4" />,
+    FAIL: <X className="h-4 w-4" />,
     EXPIRED: <Package className="h-4 w-4" />,
   };
 
   return (
     <Card className="overflow-hidden transition-all hover:shadow-lg border-gray-200">
-      {/* Product Image Container */}
-      <div className="relative h-48 bg-gray-50 p-4 flex items-center justify-center">
-        <div className="absolute top-2 right-2">
-          <Badge className={`${statusColors[status]} px-3 py-1 text-white flex items-center gap-1`}>
+      {/* Product Image Container with improved badge visibility */}
+      <div className="relative h-52 bg-gray-50 p-4">
+        <div className="absolute top-3 right-3 z-10">
+          <Badge className={`${statusColors[status]} px-3 py-1 text-white font-medium shadow-md flex items-center gap-1.5`}>
             {statusIcons[status]} {status}
           </Badge>
         </div>
-        <img 
-          src={imageUrl} 
-          alt={name}
-          className="h-full object-contain mix-blend-multiply"
-        />
+        <div className="flex items-center justify-center h-full w-full">
+          <img 
+            src={imageUrl} 
+            alt={name}
+            className="max-h-full max-w-full object-contain mix-blend-multiply"
+          />
+        </div>
       </div>
       
       <CardContent className="p-4">

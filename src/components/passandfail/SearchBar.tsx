@@ -15,13 +15,13 @@ const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
       <Input 
         type="text" 
         placeholder="Search products, brands, categories..." 
-        className="h-12 pl-4 pr-10 rounded-l-md flex-1"
+        className="h-12 pl-4 pr-12 rounded-md flex-1"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <Button 
         variant="default" 
-        className="bg-green-500 hover:bg-green-600 h-12 px-4 rounded-r-md absolute right-0"
+        className="bg-green-500 hover:bg-green-600 h-12 w-12 flex items-center justify-center rounded-md absolute right-0"
       >
         <Search size={20} />
       </Button>

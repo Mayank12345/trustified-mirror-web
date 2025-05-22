@@ -42,38 +42,40 @@ const PassAndFail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 container py-10">
-        <h1 className="text-3xl font-bold text-center mb-8">Product Certification Database</h1>
-        
-        {/* Search and Filters */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Search */}
-            <div className="md:col-span-2">
-              <SearchBar 
-                searchTerm={searchTerm} 
-                setSearchTerm={setSearchTerm} 
+      <main className="flex-1">
+        <div className="container py-10 px-4 md:px-6">
+          <h1 className="text-3xl font-bold text-center mb-10">Product Certification Database</h1>
+          
+          {/* Search and Filters */}
+          <div className="max-w-5xl mx-auto mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {/* Search */}
+              <div className="md:col-span-2">
+                <SearchBar 
+                  searchTerm={searchTerm} 
+                  setSearchTerm={setSearchTerm} 
+                />
+              </div>
+              
+              {/* Filters */}
+              <FiltersSection 
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                activeFilter={activeFilter}
+                setActiveFilter={setActiveFilter}
+                categories={categories}
               />
             </div>
-            
-            {/* Filters */}
-            <FiltersSection 
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              activeFilter={activeFilter}
-              setActiveFilter={setActiveFilter}
-              categories={categories}
-            />
           </div>
+          
+          {/* Products Grid */}
+          <div className="mt-8">
+            <ProductGrid products={filteredProducts} />
+          </div>
+          
+          {/* Table View */}
+          <ProductTable products={filteredProducts} />
         </div>
-        
-        {/* Products Grid */}
-        <div className="mt-8">
-          <ProductGrid products={filteredProducts} />
-        </div>
-        
-        {/* Table View */}
-        <ProductTable products={filteredProducts} />
       </main>
       <Footer />
     </div>

@@ -1,28 +1,28 @@
 
 import React from 'react';
-import { ArrowRight, Award, CheckCircle, PenTool, Upload } from 'lucide-react';
+import { ArrowRight, Package, FlaskConical, FileCheck, Shield } from 'lucide-react';
 
 const HowItWorksSection = () => {
   const steps = [
     {
-      icon: <PenTool className="h-10 w-10 text-white" />,
-      title: "Design Your Credentials",
-      description: "Create beautiful digital certificates or badges using our customizable templates or design from scratch."
+      icon: <Package className="h-10 w-10 text-white" />,
+      title: "We Purchase Products",
+      description: "We purchase products anonymously from retail stores, just like regular consumers do."
     },
     {
-      icon: <Upload className="h-10 w-10 text-white" />,
-      title: "Issue on Blockchain",
-      description: "Issue your credentials securely on the blockchain with just a few clicks."
+      icon: <FlaskConical className="h-10 w-10 text-white" />,
+      title: "Independent Lab Testing",
+      description: "Products are sent to our certified laboratories for comprehensive analysis and testing."
     },
     {
-      icon: <Award className="h-10 w-10 text-white" />,
-      title: "Share with Recipients",
-      description: "Recipients receive their credentials via email and can share them on social media."
+      icon: <FileCheck className="h-10 w-10 text-white" />,
+      title: "Generate Lab Reports",
+      description: "Detailed reports are generated showing ingredient analysis, purity, and safety results."
     },
     {
-      icon: <CheckCircle className="h-10 w-10 text-white" />,
-      title: "Verify Anytime",
-      description: "Anyone can verify the authenticity of credentials instantly using our verification portal."
+      icon: <Shield className="h-10 w-10 text-white" />,
+      title: "Publish Results",
+      description: "Test results are published transparently to help consumers make informed decisions."
     }
   ];
 
@@ -31,10 +31,10 @@ const HowItWorksSection = () => {
       <div className="container px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-            How <span className="gradient-text">It Works</span>
+            How Our Certification <span className="text-green-600">Process Works</span>
           </h2>
           <p className="mt-4 text-gray-500 md:text-xl">
-            A simple four-step process to issue and verify digital credentials on blockchain.
+            A transparent four-step process to ensure supplement safety and quality.
           </p>
         </div>
         
@@ -42,12 +42,15 @@ const HowItWorksSection = () => {
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center text-center animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
               <div className="relative mb-6">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-600">
                   {step.icon}
+                </div>
+                <div className="absolute -top-2 -right-2 bg-white border-2 border-green-600 rounded-full w-8 h-8 flex items-center justify-center text-green-600 font-bold text-sm">
+                  {index + 1}
                 </div>
                 <div className="absolute top-1/2 left-full hidden -translate-y-1/2 lg:block">
                   {index < steps.length - 1 && (
-                    <ArrowRight className="h-8 w-8 text-primary/30" />
+                    <ArrowRight className="h-8 w-8 text-green-600/30" />
                   )}
                 </div>
               </div>

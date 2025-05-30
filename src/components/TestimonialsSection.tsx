@@ -27,7 +27,7 @@ const Testimonial = ({ name, role, company, quote, rating }: TestimonialProps) =
         </div>
         <blockquote className="text-gray-700 mb-4">"{quote}"</blockquote>
         <div className="flex items-center mt-4">
-          <div className="bg-purple-100 text-primary rounded-full h-10 w-10 flex items-center justify-center font-semibold">
+          <div className="bg-green-100 text-green-600 rounded-full h-10 w-10 flex items-center justify-center font-semibold">
             {name.charAt(0)}
           </div>
           <div className="ml-3">
@@ -44,44 +44,44 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "Director of Education",
-      company: "Global Learning Institute",
-      quote: "Trustified has completely transformed how we issue certificates to our students. The blockchain verification gives our credentials real value in the job market.",
+      role: "Fitness Enthusiast",
+      company: "Health & Wellness Blog",
+      quote: "Trustified helped me discover that my expensive protein powder was actually contaminated with heavy metals. Their testing saved my health!",
       rating: 5,
     },
     {
-      name: "Michael Chen",
-      role: "HR Manager",
-      company: "Tech Innovations",
-      quote: "As someone who verifies credentials regularly, I can't express how much time we've saved with Trustified. The instant verification is a game-changer.",
+      name: "Dr. Michael Chen",
+      role: "Sports Nutritionist",
+      company: "Elite Performance Center",
+      quote: "As a professional, I rely on Trustified's lab reports to recommend safe supplements to my athletes. Their testing is thorough and reliable.",
       rating: 5,
     },
     {
       name: "Priya Sharma",
-      role: "CEO",
-      company: "Skill Academy",
-      quote: "We've seen a 40% increase in course enrollment since implementing Trustified certificates. Students value the blockchain-verified credentials.",
+      role: "Personal Trainer",
+      company: "FitLife Gym",
+      quote: "I always check Trustified before recommending any supplement to my clients. It's become an essential tool in my practice.",
       rating: 5,
     },
     {
       name: "David Wilson",
-      role: "Operations Director",
-      company: "Certification Council",
-      quote: "The custom design features combined with blockchain security makes Trustified the best credentialing solution we've used in our 15 years of operation.",
+      role: "Supplement Store Owner",
+      company: "Pure Nutrition",
+      quote: "Trustified testing has helped us stock only genuine, safe products. Our customers trust us more knowing we use their verification.",
       rating: 4,
     },
     {
       name: "Elena Rodriguez",
-      role: "Event Manager",
-      company: "Global Summit Series",
-      quote: "Our attendees love receiving blockchain-verified badges for our events. It's added a whole new level of professionalism to our conferences.",
+      role: "Health Coach",
+      company: "Wellness Solutions",
+      quote: "The detailed lab reports from Trustified give me confidence when advising clients about supplement safety and quality.",
       rating: 5,
     },
     {
       name: "James Lee",
-      role: "Technical Director",
-      company: "Blockchain Education Network",
-      quote: "From a technical perspective, Trustified offers the perfect balance between robust security and ease of use. Their API is well-documented and simple to integrate.",
+      role: "Athlete",
+      company: "Professional Bodybuilder",
+      quote: "After finding out my creatine was spiked with banned substances through Trustified, I never buy supplements without checking their database first.",
       rating: 5,
     },
   ];
@@ -108,10 +108,10 @@ const TestimonialsSection = () => {
       <div className="container px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-            What Our <span className="gradient-text">Customers Say</span>
+            What Our <span className="text-green-600">Users Say</span>
           </h2>
           <p className="mt-4 text-gray-500 md:text-xl">
-            Hear from organizations that have transformed their credentialing process with Trustified.
+            Hear from people who trust our lab testing to make informed supplement choices.
           </p>
         </div>
         

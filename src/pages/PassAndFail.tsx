@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { products, categories } from '@/data/products';
 import SearchBar from '@/components/passandfail/SearchBar';
 import FiltersSection from '@/components/passandfail/FiltersSection';
@@ -93,7 +92,6 @@ const PassAndFail = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

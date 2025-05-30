@@ -1,10 +1,8 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products } from '@/data/products';
 import { ProductType } from '@/types/product';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Check, X, Package, ArrowLeft, FileText } from 'lucide-react';
@@ -48,7 +46,6 @@ const ProductDetail = () => {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -67,7 +64,6 @@ const ProductDetail = () => {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -359,7 +355,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

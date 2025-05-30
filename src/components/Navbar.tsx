@@ -33,7 +33,7 @@ const Navbar = () => {
             <Link to="/passandfail" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
               PASS/FAIL
             </Link>
-            <Link to="/" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
+            <Link to="/gold" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
               GOLD
             </Link>
             <Link to="/" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
@@ -87,7 +87,7 @@ const Navbar = () => {
               PASS/FAIL
             </Link>
             <Link 
-              to="/" 
+              to="/gold" 
               className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md"
               onClick={toggleMobileMenu}
             >

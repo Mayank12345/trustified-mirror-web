@@ -1,8 +1,64 @@
-
 import { ProductType } from '@/types/product';
 
 export const products: ProductType[] = [
-  // Protein Powders
+  // Gold Certified Products
+  {
+    id: 101,
+    name: '100 % Performance Whey',
+    brand: 'Avvatar',
+    category: 'Whey Protein Powder',
+    imageUrl: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=1000&auto=format&fit=crop',
+    status: 'PASS',
+    date: '2023-05-03',
+    description: 'Premium whey protein powder with 100% performance guarantee. Gold certified for exceptional quality and purity standards.',
+    rating: 4.9
+  },
+  {
+    id: 102,
+    name: 'Pure 07 Preworkout',
+    brand: 'Naturalein',
+    category: 'Pre-Workout',
+    imageUrl: 'https://images.unsplash.com/photo-1594498653385-d5172c532c00?q=80&w=1000&auto=format&fit=crop',
+    status: 'PASS',
+    date: '2022-12-28',
+    description: 'Advanced pre-workout formula designed for maximum performance and energy boost. Gold standard certification.',
+    rating: 4.8
+  },
+  {
+    id: 103,
+    name: 'Creatine Monohydrate',
+    brand: 'Avvatar',
+    category: 'Creatine',
+    imageUrl: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1000&auto=format&fit=crop',
+    status: 'PASS',
+    date: '2024-12-18',
+    description: 'Pure creatine monohydrate with pharmaceutical grade quality. Gold certified for superior purity and effectiveness.',
+    rating: 4.9
+  },
+  {
+    id: 104,
+    name: 'Biozyme Performance Whey',
+    brand: 'Muscleblaze Biozyme Iso Zero',
+    category: 'Whey Protein Powder',
+    imageUrl: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=1000&auto=format&fit=crop',
+    status: 'PASS',
+    date: '2024-12-04',
+    description: 'Advanced biozyme technology for superior protein absorption. Zero sugar formula with gold standard certification.',
+    rating: 4.8
+  },
+  {
+    id: 105,
+    name: 'Biozyme Performance Whey',
+    brand: 'Muscleblaze',
+    category: 'Whey Protein Powder',
+    imageUrl: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=1000&auto=format&fit=crop',
+    status: 'PASS',
+    date: '2024-07-21',
+    description: 'Premium biozyme whey protein with enhanced digestibility and absorption. Gold certified quality assurance.',
+    rating: 4.7
+  },
+  
+  // Original Products
   {
     id: 1,
     name: 'Souper Super Oats',
@@ -47,8 +103,6 @@ export const products: ProductType[] = [
     description: 'USDA certified organic protein blend from pea, brown rice, and chia seeds. No artificial flavors or preservatives.',
     rating: 4.5
   },
-  
-  // Creatine
   {
     id: 5,
     name: 'Ultra Creatine',
@@ -82,8 +136,6 @@ export const products: ProductType[] = [
     description: 'Pharmaceutical grade creatine monohydrate with 99.9% purity. Unflavored and mixes easily with any beverage.',
     rating: 4.2
   },
-  
-  // Mass Gainer
   {
     id: 8,
     name: 'Mass Gainer 5000',
@@ -117,8 +169,6 @@ export const products: ProductType[] = [
     description: 'Maximum calorie formula for hardgainers. Contains excessive amounts of sugar and artificial ingredients above regulatory limits.',
     rating: 2.1
   },
-  
-  // Omega 3
   {
     id: 11,
     name: 'Omega 3 Fish Oil',
@@ -154,4 +204,4 @@ export const products: ProductType[] = [
   }
 ];
 
-export const categories = ['All Categories', 'Protein Powders', 'Creatine', 'Mass Gainer', 'Omega 3'];
+export const categories = ['All Categories', 'Protein Powders', 'Creatine', 'Mass Gainer', 'Omega 3', 'Pre-Workout', 'Whey Protein Powder'];

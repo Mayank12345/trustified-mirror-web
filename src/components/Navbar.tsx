@@ -36,7 +36,7 @@ const Navbar = () => {
             <Link to="/gold" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
               GOLD
             </Link>
-            <Link to="/" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
+            <Link to="/get-certified" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
               GET CERTIFIED
             </Link>
             <Link to="/nmr-reports" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
@@ -94,7 +94,7 @@ const Navbar = () => {
               GOLD
             </Link>
             <Link 
-              to="/" 
+              to="/get-certified" 
               className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md"
               onClick={toggleMobileMenu}
             >

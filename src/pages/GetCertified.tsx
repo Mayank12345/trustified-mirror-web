@@ -64,31 +64,6 @@ const GetCertified = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      {/* Certified Brands Section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Certified Brands</h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            These brands have earned our trust through rigorous blind testing and transparency standards.
-          </p>
-        </div>
-
-        {/* Brands Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16 max-w-6xl mx-auto">
-          {certifiedBrands.map((brand, index) => (
-            <div 
-              key={index}
-              className="bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center h-24 hover:shadow-md transition-shadow"
-            >
-              <div className="text-center">
-                <div className="text-lg font-bold text-gray-700">{brand.logo}</div>
-                <div className="text-xs text-gray-500 mt-1">{brand.name}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Get Certified Section */}
       <div className="container mx-auto px-4 py-16 bg-white">
         {/* Header Section */}
@@ -98,9 +73,9 @@ const GetCertified = () => {
               <HandHeart className="h-16 w-16 text-green-500" />
             </div>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Interested in getting <span className="text-green-500">Trustified</span>?
-          </h2>
+          </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Show your customers that you are completely transparent about what's in the label is in your product with India's first and only 100% blind testing certification.
           </p>
@@ -302,6 +277,31 @@ const GetCertified = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </div>
+
+      {/* Certified Brands Section */}
+      <div className="container mx-auto px-4 py-16 bg-gray-50">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Certified Brands</h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            These brands have earned our trust through rigorous blind testing and transparency standards.
+          </p>
+        </div>
+
+        {/* Brands Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+          {certifiedBrands.map((brand, index) => (
+            <div 
+              key={index}
+              className="bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center h-24 hover:shadow-md transition-shadow"
+            >
+              <div className="text-center">
+                <div className="text-lg font-bold text-gray-700">{brand.logo}</div>
+                <div className="text-xs text-gray-500 mt-1">{brand.name}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { products, categories } from '@/data/products';
 import SearchBar from '@/components/passandfail/SearchBar';
 import FiltersSection from '@/components/passandfail/FiltersSection';
-import ProductGrid from '@/components/passandfail/ProductGrid';
-import ProductTable from '@/components/passandfail/ProductTable';
+import ProductCard from '@/components/ProductCard';
 import { ProductType } from '@/types/product';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -14,7 +14,6 @@ const PassAndFail = () => {
   const [activeFilter, setActiveFilter] = useState<'PASS' | 'FAIL' | 'EXPIRED' | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>(products);
-  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   
   useEffect(() => {
     let results = [...products];
@@ -43,16 +42,28 @@ const PassAndFail = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
+      
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-green-500 to-green-600 text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold mb-4">
+            Discover Product Testing Results
+          </h1>
+          <p className="text-xl text-green-100 max-w-3xl mx-auto leading-relaxed">
+            Transparent blind testing results for supplement products. See which products pass our rigorous quality standards and which ones don't.
+          </p>
+        </div>
+      </div>
+
       <main className="flex-1 py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-            {/* Header Section */}
+            {/* Search and Filters */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <h1 className="text-3xl font-bold text-gray-900">Discover Products</h1>
+              <h2 className="text-2xl font-bold text-gray-900">Product Results</h2>
               <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
             
-            {/* Filters */}
             <FiltersSection 
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
@@ -61,37 +72,48 @@ const PassAndFail = () => {
               categories={categories}
             />
             
-            {/* View Toggle */}
-            <div className="flex justify-end">
-              <Tabs 
-                defaultValue="grid" 
-                value={viewMode} 
-                onValueChange={(value) => setViewMode(value as 'grid' | 'table')}
-                className="w-[200px]"
-              >
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="grid">Grid View</TabsTrigger>
-                  <TabsTrigger value="table">Table View</TabsTrigger>
-                </TabsList>
-              </Tabs>
+            {/* Products Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  imageUrl={product.imageUrl}
+                  name={product.name}
+                  brand={product.brand}
+                  category={product.category}
+                  status={product.status}
+                  date={product.date}
+                />
+              ))}
             </div>
-            
-            {/* Products Display */}
-            {viewMode === 'grid' ? (
-              <ProductGrid products={filteredProducts} />
-            ) : (
-              <ProductTable products={filteredProducts} />
-            )}
             
             {/* Empty State */}
             {filteredProducts.length === 0 && (
               <div className="text-center py-16">
-                <p className="text-xl text-gray-500">No products match your search criteria.</p>
+                <div className="bg-white rounded-lg shadow-sm p-12">
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">No Products Found</h3>
+                  <p className="text-lg text-gray-500 mb-6">
+                    No products match your current search criteria. Try adjusting your filters or search terms.
+                  </p>
+                  <button 
+                    onClick={() => {
+                      setSearchTerm('');
+                      setActiveFilter('ALL');
+                      setSelectedCategory('All Categories');
+                    }}
+                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    Clear All Filters
+                  </button>
+                </div>
               </div>
             )}
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };

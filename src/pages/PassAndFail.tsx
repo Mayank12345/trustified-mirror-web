@@ -5,9 +5,11 @@ import Footer from '@/components/Footer';
 import { products, categories } from '@/data/products';
 import SearchBar from '@/components/passandfail/SearchBar';
 import FiltersSection from '@/components/passandfail/FiltersSection';
-import ProductCard from '@/components/ProductCard';
 import { ProductType } from '@/types/product';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const PassAndFail = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -72,19 +74,79 @@ const PassAndFail = () => {
               categories={categories}
             />
             
-            {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Products Grid - Using Gold page card format */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  imageUrl={product.imageUrl}
-                  name={product.name}
-                  brand={product.brand}
-                  category={product.category}
-                  status={product.status}
-                  date={product.date}
-                />
+                <Card key={product.id} className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  {/* Trustified Badge and Product Image */}
+                  <div className="relative">
+                    <div className="absolute top-4 left-4 z-10">
+                      <div className="bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                        <span className="w-2 h-2 bg-black rounded-full"></span>
+                        Trustified
+                      </div>
+                    </div>
+                    
+                    {/* Product Image */}
+                    <div className="h-64 bg-gray-100 p-6 flex items-center justify-center">
+                      <img 
+                        src={product.imageUrl} 
+                        alt={product.name}
+                        className="max-h-full max-w-full object-contain mix-blend-multiply"
+                      />
+                    </div>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    {/* Brand Name */}
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{product.brand}</h3>
+                    
+                    {/* Product Details */}
+                    <div className="space-y-2 mb-6">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Product Name</span>
+                        <span className="text-gray-900 font-medium">{product.name}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Category</span>
+                        <span className="text-gray-900">{product.category}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Batch No. Tested</span>
+                        <span className="text-gray-900">BATCH{product.id}001</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Date Certified</span>
+                        <span className="text-gray-900">{product.date}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Tested By</span>
+                        <span className="text-gray-900">Eurofins</span>
+                      </div>
+                      <div className="flex justify-between text-sm items-center">
+                        <span className="text-gray-600">Testing Status</span>
+                        <Badge className={
+                          product.status === 'PASS' ? "bg-green-500 text-white" :
+                          product.status === 'FAIL' ? "bg-red-500 text-white" :
+                          "bg-amber-500 text-white"
+                        }>
+                          {product.status === 'PASS' ? 'Passed' : 
+                           product.status === 'FAIL' ? 'Failed' : 'Expired'}
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    {/* See Report Button */}
+                    <Button 
+                      className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2 rounded-full"
+                      asChild
+                    >
+                      <Link to={`/product/${product.id}`}>
+                        See Report
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
               ))}
             </div>
             

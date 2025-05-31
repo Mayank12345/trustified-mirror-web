@@ -27,9 +27,6 @@ const Navbar = () => {
             <Link to="/" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
               ABOUT
             </Link>
-            <Link to="/" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
-              CERTIFIED BRANDS
-            </Link>
             <Link to="/passandfail" className="text-sm font-medium text-gray-700 hover:text-green-600 transition-colors">
               PASS/FAIL
             </Link>
@@ -71,13 +68,6 @@ const Navbar = () => {
               onClick={toggleMobileMenu}
             >
               ABOUT
-            </Link>
-            <Link 
-              to="/" 
-              className="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md"
-              onClick={toggleMobileMenu}
-            >
-              CERTIFIED BRANDS
             </Link>
             <Link 
               to="/passandfail" 

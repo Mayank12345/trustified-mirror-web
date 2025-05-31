@@ -19,6 +19,30 @@ const formSchema = z.object({
   description: z.string().min(10, { message: "Description must be at least 10 characters." }),
 });
 
+const certifiedBrands = [
+  { name: 'Naturalein', logo: 'A' },
+  { name: 'MuscleBlaze', logo: 'MB' },
+  { name: 'Avvatar', logo: 'AV' },
+  { name: 'Asitis', logo: 'AS' },
+  { name: 'MN', logo: 'MN' },
+  { name: 'Nutrabox', logo: 'NB' },
+  { name: 'Nakpro', logo: 'NK' },
+  { name: 'Nutrabay', logo: 'NT' },
+  { name: 'Wellversed', logo: 'WV' },
+  { name: 'TATA 1mg', logo: 'T1' },
+  { name: 'The Whole Truth', logo: 'TWT' },
+  { name: 'TrueForma', logo: 'TF' },
+  { name: 'HealthFarm', logo: 'HF' },
+  { name: 'Ruit', logo: 'RT' },
+  { name: 'Gentle Beast', logo: 'GB' },
+  { name: 'Fuel One', logo: 'F1' },
+  { name: 'Othlab', logo: 'OL' },
+  { name: 'MW', logo: 'MW' },
+  { name: 'bGreen', logo: 'BG' },
+  { name: 'Blackbeast', logo: 'BB' },
+  { name: 'Yoga Bar', logo: 'YB' },
+];
+
 const GetCertified = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,17 +64,43 @@ const GetCertified = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
+      {/* Certified Brands Section */}
       <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Certified Brands</h1>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            These brands have earned our trust through rigorous blind testing and transparency standards.
+          </p>
+        </div>
+
+        {/* Brands Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16 max-w-6xl mx-auto">
+          {certifiedBrands.map((brand, index) => (
+            <div 
+              key={index}
+              className="bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center h-24 hover:shadow-md transition-shadow"
+            >
+              <div className="text-center">
+                <div className="text-lg font-bold text-gray-700">{brand.logo}</div>
+                <div className="text-xs text-gray-500 mt-1">{brand.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Get Certified Section */}
+      <div className="container mx-auto px-4 py-16 bg-white">
         {/* Header Section */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
-            <div className="bg-white p-4 rounded-full shadow-lg">
+            <div className="bg-green-100 p-4 rounded-full shadow-lg">
               <HandHeart className="h-16 w-16 text-green-500" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
             Interested in getting <span className="text-green-500">Trustified</span>?
-          </h1>
+          </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Show your customers that you are completely transparent about what's in the label is in your product with India's first and only 100% blind testing certification.
           </p>

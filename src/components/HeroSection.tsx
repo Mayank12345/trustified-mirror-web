@@ -39,15 +39,16 @@ const HeroSection = () => {
             Choose Safe. Be Safe
           </p>
           
-          {/* Search Bar */}
-          <div className="flex max-w-3xl mx-auto mb-16">
+          {/* Improved Search Bar */}
+          <div className="flex max-w-4xl mx-auto mb-16 shadow-2xl">
             <input
               type="text"
               placeholder="Search our certified products"
-              className="flex-1 px-8 py-5 text-gray-900 text-lg rounded-l-xl focus:outline-none focus:ring-4 focus:ring-green-500/50 shadow-lg"
+              className="flex-1 px-8 py-6 text-gray-900 text-xl rounded-l-2xl focus:outline-none focus:ring-4 focus:ring-green-500/50 border-0"
             />
-            <Button className="bg-green-500 hover:bg-green-600 px-10 py-5 rounded-r-xl rounded-l-none text-lg shadow-lg">
-              <Search className="h-6 w-6" />
+            <Button className="bg-green-500 hover:bg-green-600 px-12 py-6 rounded-r-2xl rounded-l-none text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+              <Search className="h-7 w-7 mr-2" />
+              Search
             </Button>
           </div>
         </div>
@@ -57,85 +58,95 @@ const HeroSection = () => {
       <div className="relative z-10 bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           {/* Process preview */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               How our certification <span className="text-green-600">process works?</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
               We follow a rigorous 4-step process to ensure your supplements are safe and authentic
             </p>
-          </div>
-          
-          {/* App Store Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <a href="#" className="transition-transform hover:scale-105">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                alt="Get it on Google Play"
-                className="h-16"
-              />
-            </a>
-            <a href="#" className="transition-transform hover:scale-105">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
-                alt="Download on the App Store"
-                className="h-16"
-              />
-            </a>
+            
+            {/* App Store Buttons - Better positioned */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+              <a 
+                href="https://play.google.com/store/apps/details?id=com.trustified.app" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform hover:scale-105"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                  alt="Get it on Google Play"
+                  className="h-16"
+                />
+              </a>
+              <a 
+                href="https://apps.apple.com/in/app/trustified/id6473800943" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform hover:scale-105"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+                  alt="Download on the App Store"
+                  className="h-16"
+                />
+              </a>
+            </div>
           </div>
           
           {/* Process icons preview with steps */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mb-4 relative">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 bg-green-600 rounded"></div>
+              <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center mb-6 relative shadow-lg">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-green-600 rounded"></div>
                 </div>
-                <div className="absolute -top-2 -right-2 bg-white border-2 border-green-600 rounded-full w-8 h-8 flex items-center justify-center text-green-600 font-bold text-sm">
+                <div className="absolute -top-3 -right-3 bg-white border-3 border-green-600 rounded-full w-10 h-10 flex items-center justify-center text-green-600 font-bold text-lg shadow-md">
                   1
                 </div>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Purchase Products</h3>
-              <p className="text-sm text-gray-600">We buy products anonymously from retail stores</p>
+              <h3 className="font-semibold text-gray-900 mb-3 text-lg">Purchase Products</h3>
+              <p className="text-gray-600">We buy products anonymously from retail stores</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mb-4 relative">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 bg-green-600 rounded"></div>
+              <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center mb-6 relative shadow-lg">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-green-600 rounded"></div>
                 </div>
-                <div className="absolute -top-2 -right-2 bg-white border-2 border-green-600 rounded-full w-8 h-8 flex items-center justify-center text-green-600 font-bold text-sm">
+                <div className="absolute -top-3 -right-3 bg-white border-3 border-green-600 rounded-full w-10 h-10 flex items-center justify-center text-green-600 font-bold text-lg shadow-md">
                   2
                 </div>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Lab Testing</h3>
-              <p className="text-sm text-gray-600">Independent laboratory analysis for safety</p>
+              <h3 className="font-semibold text-gray-900 mb-3 text-lg">Lab Testing</h3>
+              <p className="text-gray-600">Independent laboratory analysis for safety</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mb-4 relative">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 bg-green-600 rounded"></div>
+              <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center mb-6 relative shadow-lg">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-green-600 rounded"></div>
                 </div>
-                <div className="absolute -top-2 -right-2 bg-white border-2 border-green-600 rounded-full w-8 h-8 flex items-center justify-center text-green-600 font-bold text-sm">
+                <div className="absolute -top-3 -right-3 bg-white border-3 border-green-600 rounded-full w-10 h-10 flex items-center justify-center text-green-600 font-bold text-lg shadow-md">
                   3
                 </div>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Generate Reports</h3>
-              <p className="text-sm text-gray-600">Detailed lab reports with complete analysis</p>
+              <h3 className="font-semibold text-gray-900 mb-3 text-lg">Generate Reports</h3>
+              <p className="text-gray-600">Detailed lab reports with complete analysis</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mb-4 relative">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 bg-green-600 rounded"></div>
+              <div className="w-24 h-24 bg-green-600 rounded-full flex items-center justify-center mb-6 relative shadow-lg">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-green-600 rounded"></div>
                 </div>
-                <div className="absolute -top-2 -right-2 bg-white border-2 border-green-600 rounded-full w-8 h-8 flex items-center justify-center text-green-600 font-bold text-sm">
+                <div className="absolute -top-3 -right-3 bg-white border-3 border-green-600 rounded-full w-10 h-10 flex items-center justify-center text-green-600 font-bold text-lg shadow-md">
                   4
                 </div>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Publish Results</h3>
-              <p className="text-sm text-gray-600">Transparent results to help consumers</p>
+              <h3 className="font-semibold text-gray-900 mb-3 text-lg">Publish Results</h3>
+              <p className="text-gray-600">Transparent results to help consumers</p>
             </div>
           </div>
         </div>

@@ -128,12 +128,14 @@ const TestimonialsSection = () => {
           ))}
         </div>
         
+        {/* Fixed pagination controls */}
         <div className="flex justify-center mt-8 gap-2">
           <Button 
             variant="outline" 
             size="icon"
             onClick={prevPage}
             disabled={pageCount <= 1}
+            className="h-10 w-10"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -142,7 +144,12 @@ const TestimonialsSection = () => {
             <Button
               key={i}
               variant={i === currentPage ? "default" : "outline"}
-              className="w-10"
+              className="h-10 w-10 text-sm font-medium bg-white border-gray-300 text-gray-700 hover:bg-gray-50 data-[state=active]:bg-green-600 data-[state=active]:text-white"
+              style={{
+                backgroundColor: i === currentPage ? '#16a34a' : '#ffffff',
+                color: i === currentPage ? '#ffffff' : '#374151',
+                borderColor: '#d1d5db'
+              }}
               onClick={() => setCurrentPage(i)}
             >
               {i + 1}
@@ -154,6 +161,7 @@ const TestimonialsSection = () => {
             size="icon"
             onClick={nextPage}
             disabled={pageCount <= 1}
+            className="h-10 w-10"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>

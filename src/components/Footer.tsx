@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 
@@ -12,7 +11,7 @@ const Footer = () => {
               <span className="text-2xl font-bold gradient-text">Trustified</span>
             </a>
             <p className="mt-2 text-gray-500 max-w-xs">
-              Blockchain-powered digital credentials for the modern world. Secure, verifiable, and always accessible.
+              Digital credentials for the modern world. Secure, verifiable, and always accessible.
             </p>
             <div className="flex space-x-4 mt-4">
               <a href="#" className="text-gray-500 hover:text-primary">
@@ -36,7 +35,6 @@ const Footer = () => {
               <li><a href="#" className="text-gray-500 hover:text-primary">Features</a></li>
               <li><a href="#" className="text-gray-500 hover:text-primary">Templates</a></li>
               <li><a href="#" className="text-gray-500 hover:text-primary">Pricing</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">API</a></li>
               <li><a href="#" className="text-gray-500 hover:text-primary">Integration</a></li>
             </ul>
           </div>

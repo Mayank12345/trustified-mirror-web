@@ -1,82 +1,66 @@
+
 import React from 'react';
-import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 py-12 md:py-16">
-      <div className="container px-4 md:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          <div className="col-span-2">
-            <a href="/" className="flex items-center">
-              <span className="text-2xl font-bold gradient-text">Trustified</span>
-            </a>
-            <p className="mt-2 text-gray-500 max-w-xs">
-              Digital credentials for the modern world. Secure, verifiable, and always accessible.
-            </p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-500 hover:text-primary">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-500 hover:text-primary">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-500 hover:text-primary">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-500 hover:text-primary">
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Product</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-500 hover:text-primary">Features</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Templates</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Pricing</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Integration</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-500 hover:text-primary">Documentation</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Blog</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Case Studies</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Help Center</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Webinars</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-500 hover:text-primary">About</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Careers</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Contact Us</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-500 hover:text-primary">Terms of Service</a></li>
-            </ul>
-          </div>
+    <footer className="bg-green-500 py-16">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-4xl font-bold text-white mb-8">Connect with us.</h2>
+        
+        {/* Email Subscription */}
+        <div className="flex flex-col sm:flex-row max-w-md mx-auto mb-8">
+          <input
+            type="email"
+            placeholder="email@example.com"
+            className="flex-1 px-4 py-3 text-gray-700 bg-white border-0 rounded-l-lg sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-300"
+          />
+          <button className="bg-black text-white px-8 py-3 rounded-r-lg sm:rounded-l-none hover:bg-gray-800 transition-colors font-semibold">
+            Join
+          </button>
         </div>
         
-        <div className="mt-12 border-t pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Trustified. All rights reserved.
+        {/* Contact Email and Social Media */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white">
+          <p className="text-lg">
+            Email us at: support@trustified.in
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-500 hover:text-primary text-sm">
-              Privacy Policy
+          
+          <div className="flex space-x-4">
+            <a 
+              href="https://www.facebook.com/trustified.in" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-green-200 transition-colors"
+            >
+              <Facebook className="h-6 w-6" />
             </a>
-            <a href="#" className="text-gray-500 hover:text-primary text-sm">
-              Terms of Service
+            <a 
+              href="https://www.youtube.com/@Trustified-Certification" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-green-200 transition-colors"
+            >
+              <Youtube className="h-6 w-6" />
             </a>
-            <a href="#" className="text-gray-500 hover:text-primary text-sm">
-              Cookie Settings
+            <a 
+              href="https://www.instagram.com/Trustified.in/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-green-200 transition-colors"
+            >
+              <Instagram className="h-6 w-6" />
             </a>
           </div>
+        </div>
+      </div>
+      
+      {/* Copyright */}
+      <div className="bg-black py-4 mt-8">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-white text-sm">
+            © 2024 ARPIT TRUSTIFIED CERTIFICATION PRIVATE LIMITED All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

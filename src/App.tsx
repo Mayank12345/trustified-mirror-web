@@ -10,6 +10,7 @@ import Gold from "./pages/Gold";
 import NmrReports from "./pages/NmrReports";
 import GetCertified from "./pages/GetCertified";
 import ProductDetail from "./pages/ProductDetail";
+import HowWeTest from "./pages/HowWeTest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/gold" element={<Gold />} />
           <Route path="/nmr-reports" element={<NmrReports />} />
           <Route path="/get-certified" element={<GetCertified />} />
+          <Route path="/how-we-test" element={<HowWeTest />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

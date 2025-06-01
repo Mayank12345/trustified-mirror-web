@@ -6,6 +6,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import HowItWorksSection from '@/components/HowItWorksSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import CallToAction from '@/components/CallToAction';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <TestimonialsSection />
         <CallToAction />
       </main>
+      <Footer />
     </div>
   );
 };

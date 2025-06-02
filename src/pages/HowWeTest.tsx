@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +7,26 @@ import { Badge } from '@/components/ui/badge';
 import { TestTube, Shield, Award, AlertTriangle } from 'lucide-react';
 
 const HowWeTest = () => {
+  useEffect(() => {
+    // Set page-specific meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Learn about Trustified\'s comprehensive 7-level and 8-level (Gold) testing methodology for supplements. Independent, blind testing for safety and authenticity.');
+    }
+
+    // Set canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', 'https://trustified-mirror-web.lovable.app/how-we-test');
+
+    // Update page title
+    document.title = 'How We Test Supplements | 7-Level Testing Process | Trustified';
+  }, []);
+
   const sevenLevelTests = [
     {
       level: 1,
@@ -55,26 +75,28 @@ const HowWeTest = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
-      <main className="flex-1 py-12">
+      <header role="banner">
+        <Navbar />
+      </header>
+      <main id="main-content" role="main" className="flex-1 py-12">
         <div className="container mx-auto px-4 max-w-7xl">
           {/* Header */}
-          <div className="text-center mb-16">
+          <header className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               How We <span className="text-green-600">Test</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Our comprehensive testing methodology ensures every product meets the highest standards of quality, safety, and authenticity.
             </p>
-          </div>
+          </header>
 
           {/* 7 Level Testing Section */}
-          <section className="mb-20">
+          <section className="mb-20" aria-labelledby="seven-level-testing">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="flex items-center gap-3 mb-6">
-                  <TestTube className="h-8 w-8 text-green-600" />
-                  <h2 className="text-3xl font-bold text-gray-900">
+                  <TestTube className="h-8 w-8 text-green-600" aria-hidden="true" />
+                  <h2 id="seven-level-testing" className="text-3xl font-bold text-gray-900">
                     What is <span className="text-green-600">7 Level Testing</span>?
                   </h2>
                 </div>
@@ -84,18 +106,18 @@ const HowWeTest = () => {
                     To earn Trustified Certification each product must pass all the Levels of blind testing.
                   </p>
                   
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4" role="alert">
                     <div className="flex items-start gap-3">
-                      <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5" />
+                      <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5" aria-hidden="true" />
                       <p className="text-red-800 text-sm">
                         In case a product Fails with a big difference at any level then further levels will not be tested and such product will be listed under the FAIL category immediately.
                       </p>
                     </div>
                   </div>
                   
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4" role="note">
                     <div className="flex items-start gap-3">
-                      <Shield className="h-5 w-5 text-green-600 mt-0.5" />
+                      <Shield className="h-5 w-5 text-green-600 mt-0.5" aria-hidden="true" />
                       <p className="text-green-800 text-sm">
                         If product meets expected results at all the levels then it will be marked under the PASS category and company can request for the certification.
                       </p>
@@ -135,12 +157,12 @@ const HowWeTest = () => {
           </section>
 
           {/* 8 Level Testing (Gold) Section */}
-          <section className="mb-20">
+          <section className="mb-20" aria-labelledby="eight-level-testing">
             <Card className="bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-200">
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <Award className="h-8 w-8 text-yellow-600" />
-                  <CardTitle className="text-3xl font-bold">
+                  <Award className="h-8 w-8 text-yellow-600" aria-hidden="true" />
+                  <CardTitle id="eight-level-testing" className="text-3xl font-bold">
                     What is <span className="text-yellow-600">8 Level Testing</span>?
                   </CardTitle>
                 </div>
@@ -156,16 +178,16 @@ const HowWeTest = () => {
                 
                 <div className="bg-white rounded-lg p-6 border border-yellow-200">
                   <h4 className="font-semibold text-gray-900 mb-4">19 WADA Prohibited Substances Tested:</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2" role="list">
                     {dopingSubstances.map((substance, index) => (
-                      <div key={index} className="text-sm text-gray-700 bg-gray-50 rounded px-3 py-1">
+                      <div key={index} className="text-sm text-gray-700 bg-gray-50 rounded px-3 py-1" role="listitem">
                         {substance}
                       </div>
                     ))}
                   </div>
                 </div>
                 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4" role="note">
                   <p className="text-green-800 text-sm">
                     If the product passes the doping tests, then it will be declared a Trustified Gold-certified product.
                   </p>
@@ -183,10 +205,10 @@ const HowWeTest = () => {
           </section>
 
           {/* Challenge Process Section */}
-          <section className="mb-20">
+          <section className="mb-20" aria-labelledby="challenge-process">
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle id="challenge-process" className="text-2xl font-bold text-gray-900">
                   Challenge Process
                 </CardTitle>
               </CardHeader>
@@ -194,7 +216,11 @@ const HowWeTest = () => {
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     A manufacturer or company can send a challenge request against any of their failed products listed on Trustified at{' '}
-                    <a href="mailto:legal@trustified.in" className="text-green-600 hover:text-green-700">
+                    <a 
+                      href="mailto:legal@trustified.in" 
+                      className="text-green-600 hover:text-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 rounded"
+                      aria-label="Email legal department at legal@trustified.in"
+                    >
                       legal@trustified.in
                     </a>
                   </h3>
@@ -203,35 +229,35 @@ const HowWeTest = () => {
                 <div className="space-y-4">
                   <h4 className="font-semibold text-gray-900">Please note the challenger commits to the rules mentioned below:</h4>
                   
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <ul className="space-y-3 text-gray-700" role="list">
+                    <li className="flex items-start gap-3" role="listitem">
+                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
                       <span>Trustified always purchases two samples for all its tested products; therefore, the latest sample cannot be requested and submitted by the challenger.</span>
                     </li>
                     
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <li className="flex items-start gap-3" role="listitem">
+                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
                       <span>In case the challenger has some doubt in our blind testing process, then they can request a video document of how we purchased the product and sent the sealed box of it to our testing partner (we always film a proof document of our blind testing process for all our tested products).</span>
                     </li>
                     
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <li className="flex items-start gap-3" role="listitem">
+                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
                       <span>The challenger will be responsible for advance payment of the testing costs, and it will be non-refundable.</span>
                     </li>
                     
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <li className="flex items-start gap-3" role="listitem">
+                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
                       <span>Once the payment is received by Trustified through valid invoices, the challenge process will begin at our independent ISO 17025, NABL accredited laboratory partner. Challenger cannot request testing in any other specific lab.</span>
                     </li>
                     
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <li className="flex items-start gap-3" role="listitem">
+                      <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
                       <span>If the challenge confirms that the product initial result was correct, then no modifications will be done at Trustified database, in case the result of this retest will be final and will be considered the correct result regardless of any considerable correction found; the result will be final and will be the latest and updated result on the database.</span>
                     </li>
                   </ul>
                 </div>
                 
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4" role="note">
                   <p className="text-amber-800 text-sm">
                     <strong>Note:</strong> If two products with different batch numbers are found different by the lab in advance to test and keep the remaining sample, ensuring we can retest the sample in the event of a challenge.
                   </p>
@@ -241,7 +267,9 @@ const HowWeTest = () => {
           </section>
         </div>
       </main>
-      <Footer />
+      <footer role="contentinfo">
+        <Footer />
+      </footer>
     </div>
   );
 };

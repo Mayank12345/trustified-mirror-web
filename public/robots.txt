@@ -1,3 +1,14 @@
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://trustified-mirror-web.lovable.app/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific bot permissions
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +21,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
-Allow: /
+# Block access to admin/private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$

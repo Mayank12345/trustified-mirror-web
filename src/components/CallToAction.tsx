@@ -2,8 +2,20 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CallToAction = () => {
+  const navigate = useNavigate();
+
+  const handleCheckProducts = () => {
+    navigate('/passandfail');
+  };
+
+  const handleDownloadApp = () => {
+    // Open the Google Play Store link (or could show a modal with both options)
+    window.open('https://play.google.com/store/apps/details?id=com.trustified.app', '_blank');
+  };
+
   return (
     <section className="section">
       <div className="container px-4 md:px-6">
@@ -18,10 +30,21 @@ const CallToAction = () => {
                 Join thousands of consumers using Trustified to verify supplement safety and quality.
               </p>
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <Button size="lg" className="bg-white text-green-600 hover:bg-gray-100">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-green-600 hover:bg-gray-100 focus:ring-4 focus:ring-white/20"
+                  onClick={handleCheckProducts}
+                  aria-label="Check products now - view testing results"
+                >
                   Check Products Now
                 </Button>
-                <Button size="lg" variant="outline" className="text-white border-white">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-white border-white hover:bg-white/10 focus:ring-4 focus:ring-white/20"
+                  onClick={handleDownloadApp}
+                  aria-label="Download Trustified mobile app"
+                >
                   Download App
                 </Button>
               </div>

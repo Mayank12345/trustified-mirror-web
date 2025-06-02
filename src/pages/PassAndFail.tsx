@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { products, categories } from '@/data/products';
@@ -12,11 +13,20 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const PassAndFail = () => {
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState<'PASS' | 'FAIL' | 'EXPIRED' | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>(products);
   
+  useEffect(() => {
+    // Get search term from URL parameters
+    const urlSearchTerm = searchParams.get('search');
+    if (urlSearchTerm) {
+      setSearchTerm(urlSearchTerm);
+    }
+  }, [searchParams]);
+
   useEffect(() => {
     let results = [...products];
     
@@ -43,7 +53,9 @@ const PassAndFail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
+      <header role="banner">
+        <Navbar />
+      </header>
       
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-green-500 to-green-600 text-white py-16">
@@ -57,7 +69,7 @@ const PassAndFail = () => {
         </div>
       </div>
 
-      <main className="flex-1 py-8">
+      <main className="flex-1 py-8" role="main">
         <div className="container mx-auto px-4">
           <div className="flex flex-col gap-6 max-w-7xl mx-auto">
             {/* Search and Filters */}
@@ -93,6 +105,7 @@ const PassAndFail = () => {
                         src={product.imageUrl} 
                         alt={product.name}
                         className="max-h-full max-w-full object-contain mix-blend-multiply"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -138,7 +151,7 @@ const PassAndFail = () => {
                     
                     {/* See Report Button */}
                     <Button 
-                      className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2 rounded-full"
+                      className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2 rounded-full focus:ring-4 focus:ring-green-300"
                       asChild
                     >
                       <Link to={`/product/${product.id}`}>
@@ -164,7 +177,7 @@ const PassAndFail = () => {
                       setActiveFilter('ALL');
                       setSelectedCategory('All Categories');
                     }}
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors focus:ring-4 focus:ring-green-300"
                   >
                     Clear All Filters
                   </button>
@@ -175,7 +188,9 @@ const PassAndFail = () => {
         </div>
       </main>
 
-      <Footer />
+      <footer role="contentinfo">
+        <Footer />
+      </footer>
     </div>
   );
 };

@@ -1,9 +1,27 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/passandfail?search=${encodeURIComponent(searchTerm)}`);
+    } else {
+      navigate('/passandfail');
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col">
       {/* Background with product images and overlays */}
@@ -12,6 +30,8 @@ const HeroSection = () => {
           src="/lovable-uploads/24be5b58-aad2-43d0-8879-621be7dbdcab.png"
           alt="Supplement testing background"
           className="w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-black bg-opacity-70"></div>
       </div>
@@ -45,8 +65,16 @@ const HeroSection = () => {
               type="text"
               placeholder="Search our certified products"
               className="flex-1 px-8 py-6 text-gray-900 text-xl rounded-l-2xl focus:outline-none focus:ring-4 focus:ring-green-500/50 border-0"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleKeyPress}
+              aria-label="Search certified products"
             />
-            <Button className="bg-green-500 hover:bg-green-600 px-12 py-6 rounded-r-2xl rounded-l-none text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+            <Button 
+              className="bg-green-500 hover:bg-green-600 px-12 py-6 rounded-r-2xl rounded-l-none text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 focus:ring-4 focus:ring-green-300"
+              onClick={handleSearch}
+              aria-label="Search products"
+            >
               <Search className="h-7 w-7 mr-2" />
               Search
             </Button>
@@ -72,24 +100,28 @@ const HeroSection = () => {
                 href="https://play.google.com/store/apps/details?id=com.trustified.app" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-transform hover:scale-105"
+                className="transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500 rounded-lg"
+                aria-label="Download Trustified app from Google Play Store"
               >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                   alt="Get it on Google Play"
                   className="h-16"
+                  loading="lazy"
                 />
               </a>
               <a 
                 href="https://apps.apple.com/in/app/trustified/id6473800943" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-transform hover:scale-105"
+                className="transition-transform hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500 rounded-lg"
+                aria-label="Download Trustified app from Apple App Store"
               >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
                   alt="Download on the App Store"
                   className="h-16"
+                  loading="lazy"
                 />
               </a>
             </div>

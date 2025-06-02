@@ -1,25 +1,13 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
-  const handleSearch = () => {
-    if (searchTerm.trim()) {
-      navigate(`/passandfail?search=${encodeURIComponent(searchTerm)}`);
-    } else {
-      navigate('/passandfail');
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
+  const handleViewProducts = () => {
+    navigate('/passandfail');
   };
 
   return (
@@ -59,24 +47,14 @@ const HeroSection = () => {
             Choose Safe. Be Safe
           </p>
           
-          {/* Improved Search Bar */}
-          <div className="flex max-w-4xl mx-auto mb-16 shadow-2xl">
-            <input
-              type="text"
-              placeholder="Search our certified products"
-              className="flex-1 px-8 py-6 text-gray-900 text-xl rounded-l-2xl focus:outline-none focus:ring-4 focus:ring-green-500/50 border-0"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyPress={handleKeyPress}
-              aria-label="Search certified products"
-            />
+          {/* View Products Button */}
+          <div className="mb-16">
             <Button 
-              className="bg-green-500 hover:bg-green-600 px-12 py-6 rounded-r-2xl rounded-l-none text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 focus:ring-4 focus:ring-green-300"
-              onClick={handleSearch}
-              aria-label="Search products"
+              className="bg-green-500 hover:bg-green-600 px-12 py-6 text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 focus:ring-4 focus:ring-green-300 rounded-2xl"
+              onClick={handleViewProducts}
+              aria-label="View tested products"
             >
-              <Search className="h-7 w-7 mr-2" />
-              Search
+              View Tested Products
             </Button>
           </div>
         </div>

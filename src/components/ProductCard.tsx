@@ -3,8 +3,9 @@ import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, X, Package, Eye } from "lucide-react";
+import { Check, X, Package, Eye, Download } from "lucide-react";
 import { Link } from "react-router-dom";
+import { usePdfDownload } from '@/hooks/usePdfDownload';
 
 interface ProductCardProps {
   id: number;
@@ -17,6 +18,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: ProductCardProps) => {
+  const { downloadPdf, isDownloading } = usePdfDownload();
+
   const statusColors = {
     PASS: "bg-green-500 text-white",
     FAIL: "bg-red-500 text-white",
@@ -27,6 +30,10 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: Prod
     PASS: <Check className="h-4 w-4" />,
     FAIL: <X className="h-4 w-4" />,
     EXPIRED: <Package className="h-4 w-4" />,
+  };
+
+  const handleDownloadPdf = async () => {
+    await downloadPdf(id, name);
   };
 
   return (
@@ -65,15 +72,26 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: Prod
           )}
         </div>
         
-        {/* Action Button */}
-        <Button 
-          className="w-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center gap-2"
-          asChild
-        >
-          <Link to={`/product/${id}`}>
-            <Eye className="h-4 w-4" /> View Details
-          </Link>
-        </Button>
+        {/* Action Buttons */}
+        <div className="space-y-2">
+          <Button 
+            className="w-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center gap-2"
+            asChild
+          >
+            <Link to={`/product/${id}`}>
+              <Eye className="h-4 w-4" /> View Details
+            </Link>
+          </Button>
+          
+          <Button 
+            className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2"
+            onClick={handleDownloadPdf}
+            disabled={isDownloading}
+          >
+            <Download className="h-4 w-4" /> 
+            {isDownloading ? 'Downloading...' : 'Download PDF'}
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

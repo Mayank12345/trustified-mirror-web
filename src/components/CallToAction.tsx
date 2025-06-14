@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield } from 'lucide-react';
@@ -40,12 +41,12 @@ const CallToAction = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="text-white border-white hover:bg-white/10 focus:ring-4 focus:ring-white/20"
+                  className="text-white border-white hover:bg-white/10 focus:ring-4 focus:ring-white/20 flex items-center gap-2"
                   onClick={handleDownloadApp}
                   aria-label="Download Trustified mobile app"
                 >
-                  <ArrowRight className="h-4 w-4 mr-2" />
                   Download App
+                  <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
             </div>
@@ -86,3 +87,4 @@ const CallToAction = () => {
 };
 
 export default CallToAction;
+

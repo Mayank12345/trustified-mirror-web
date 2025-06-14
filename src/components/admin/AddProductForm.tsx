@@ -236,6 +236,7 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
           >
             <option value="PASS">PASS</option>
             <option value="FAIL">FAIL</option>
+            <option value="GOLD">Gold</option>
           </select>
         </div>
         <div>

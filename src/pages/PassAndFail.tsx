@@ -82,9 +82,13 @@ const PassAndFail = () => {
       );
     }
 
-    // Status filter
+    // Status filter (treat GOLD as PASS)
     if (activeFilter !== 'ALL') {
-      results = results.filter(product => product.status === activeFilter);
+      if (activeFilter === 'PASS') {
+        results = results.filter(product => product.status === 'PASS' || product.status === 'GOLD');
+      } else {
+        results = results.filter(product => product.status === activeFilter);
+      }
     }
 
     // Category filter (case- and whitespace-insensitive matching)

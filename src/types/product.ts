@@ -5,7 +5,7 @@ export type ProductType = {
   brand: string;
   category: string;
   imageUrl: string;
-  status: 'PASS' | 'FAIL' | 'EXPIRED';
+  status: 'PASS' | 'FAIL' | 'EXPIRED' | 'GOLD';
   date: string;
   description?: string;
   rating?: number;

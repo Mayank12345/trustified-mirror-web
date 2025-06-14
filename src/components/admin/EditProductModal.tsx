@@ -246,6 +246,7 @@ export default function EditProductModal({ product, open, onClose, onUpdated }: 
                 >
                   <option value="PASS">PASS</option>
                   <option value="FAIL">FAIL</option>
+                  <option value="GOLD">Gold</option>
                 </select>
               </div>
               <div>

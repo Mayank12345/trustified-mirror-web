@@ -25,12 +25,16 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     status: "PASS",
     date: "",
     description: "",
-    rating: ""
+    rating: "",
+    affiliateLink: "",
+    productWebsiteLink: "",
+    price: ""
   });
 
   const reset = () => {
     setFields({
       name: "", brand: "", category: "", status: "PASS", date: "", description: "", rating: "",
+      affiliateLink: "", productWebsiteLink: "", price: ""
     });
     setImagePreview(null);
     setPdfs([]);
@@ -83,10 +87,17 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
       .from("products")
       .insert([
         {
-          ...fields,
-          image_url,
-          rating: fields.rating ? Number(fields.rating) : null,
+          name: fields.name,
+          brand: fields.brand,
+          category: fields.category,
+          status: fields.status,
           date: fields.date ? fields.date : null,
+          description: fields.description,
+          rating: fields.rating ? Number(fields.rating) : null,
+          image_url,
+          affiliate_link: fields.affiliateLink || null,
+          product_website_link: fields.productWebsiteLink || null,
+          price: fields.price ? Number(fields.price) : null,
         }
       ])
       .select()
@@ -178,6 +189,35 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
             type="date"
             value={fields.date}
             onChange={e => setFields(x => ({ ...x, date: e.target.value }))}
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Price (USD)</label>
+          <Input
+            type="number"
+            min="0"
+            step="0.01"
+            value={fields.price}
+            onChange={e => setFields(x => ({ ...x, price: e.target.value }))}
+            placeholder="e.g. 29.99"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Affiliate Link (Amazon etc.)</label>
+          <Input
+            type="url"
+            value={fields.affiliateLink}
+            onChange={e => setFields(x => ({ ...x, affiliateLink: e.target.value }))}
+            placeholder="https://amazon.com/..."
+          />
+        </div>
+        <div className="md:col-span-2">
+          <label className="block mb-1 font-medium">Product Website Link</label>
+          <Input
+            type="url"
+            value={fields.productWebsiteLink}
+            onChange={e => setFields(x => ({ ...x, productWebsiteLink: e.target.value }))}
+            placeholder="https://brand.com/product"
           />
         </div>
         <div className="md:col-span-2">

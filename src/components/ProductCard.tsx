@@ -3,7 +3,7 @@ import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, X, Package, Eye, Download } from "lucide-react";
+import { Check, X, Package, Eye, Download, ShoppingCart, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePdfDownload } from '@/hooks/usePdfDownload';
 
@@ -15,9 +15,11 @@ interface ProductCardProps {
   category: string;
   status: 'PASS' | 'FAIL' | 'EXPIRED';
   date?: string;
+  price?: number;
+  affiliateLink?: string;
 }
 
-const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: ProductCardProps) => {
+const ProductCard = ({ id, imageUrl, name, brand, category, status, date, price, affiliateLink }: ProductCardProps) => {
   const { downloadPdf, isDownloading } = usePdfDownload();
 
   const statusColors = {
@@ -37,7 +39,7 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: Prod
   };
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-md border border-gray-200 rounded-lg">
+    <Card className="overflow-hidden transition-all hover:shadow-md border border-gray-200 rounded-lg flex flex-col">
       {/* Product Image Container */}
       <div className="relative h-56 bg-gray-100 p-6 flex items-center justify-center">
         <img 
@@ -52,17 +54,24 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: Prod
         </div>
       </div>
       
-      <CardContent className="p-5">
+      <CardContent className="p-5 flex flex-col flex-grow">
         {/* Product Information */}
-        <div className="mb-4">
+        <div className="mb-4 flex-grow">
           {/* Category */}
           <p className="text-sm text-gray-500 mb-1">{category}</p>
           
           {/* Product Name */}
-          <h3 className="font-semibold text-lg text-gray-900 line-clamp-1 mb-1">{name}</h3>
+          <h3 className="font-semibold text-lg text-gray-900 line-clamp-2 mb-1 h-14">{name}</h3> {/* Increased height for 2 lines */}
           
           {/* Brand */}
           <p className="text-sm text-gray-600 mb-2">by {brand}</p>
+
+          {/* Price */}
+          {price !== undefined && price !== null && (
+            <p className="text-xl font-bold text-green-600 mb-2">
+              ${price.toFixed(2)}
+            </p>
+          )}
           
           {/* Date */}
           {date && (
@@ -73,7 +82,7 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: Prod
         </div>
         
         {/* Action Buttons */}
-        <div className="space-y-2">
+        <div className="space-y-2 mt-auto">
           <Button 
             className="w-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center gap-2"
             asChild
@@ -83,8 +92,21 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date }: Prod
             </Link>
           </Button>
           
+          {affiliateLink && (
+            <Button 
+              variant="outline"
+              className="w-full border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 flex items-center justify-center gap-2"
+              asChild
+            >
+              <a href={affiliateLink} target="_blank" rel="noopener noreferrer">
+                <ShoppingCart className="h-4 w-4" /> Buy Now
+              </a>
+            </Button>
+          )}
+
           <Button 
-            className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2"
+            variant="outline"
+            className="w-full flex items-center justify-center gap-2"
             onClick={handleDownloadPdf}
             disabled={isDownloading}
           >

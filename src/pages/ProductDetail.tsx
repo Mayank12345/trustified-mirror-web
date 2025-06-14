@@ -4,7 +4,7 @@ import { ProductType } from '@/types/product';
 import Navbar from '@/components/Navbar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Check, X, Package, ArrowLeft, FileText } from 'lucide-react';
+import { Check, X, Package, ArrowLeft, FileText, ExternalLink, ShoppingCart } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from '@/components/ui/separator';
@@ -25,7 +25,6 @@ const ProductDetail = () => {
       setLoading(true);
       setError(null);
 
-      // Fetch product from Supabase using Number(id)
       supabase
         .from("products")
         .select("*")
@@ -46,6 +45,9 @@ const ProductDetail = () => {
               date: data.date,
               description: data.description ?? '',
               rating: data.rating ?? undefined,
+              affiliateLink: data.affiliate_link ?? undefined,
+              productWebsiteLink: data.product_website_link ?? undefined,
+              price: data.price ?? undefined,
             });
             setError(null);
           }
@@ -137,9 +139,9 @@ const ProductDetail = () => {
             </Link>
           </Button>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Product Image */}
-            <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center h-[400px]">
+            <div className="md:col-span-1 bg-white p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center h-[400px]">
               <img 
                 src={product.imageUrl} 
                 alt={product.name} 
@@ -148,7 +150,7 @@ const ProductDetail = () => {
             </div>
             
             {/* Product Details */}
-            <div>
+            <div className="md:col-span-2">
               <div className="mb-2">
                 <p className="text-sm text-gray-500">{product.category}</p>
               </div>
@@ -158,16 +160,41 @@ const ProductDetail = () => {
               
               {/* Status Badge */}
               <Badge 
-                className={`${statusColors[product.status]} px-4 py-2 text-base font-medium shadow-sm flex items-center gap-2 mb-6 w-fit`}
+                className={`${statusColors[product.status]} px-4 py-2 text-base font-medium shadow-sm flex items-center gap-2 mb-4 w-fit`}
               >
                 {statusIcons[product.status]} {product.status}
               </Badge>
+
+              {/* Price */}
+              {product.price !== undefined && product.price !== null && (
+                <p className="text-3xl font-bold text-green-600 mb-6">
+                  ${product.price.toFixed(2)}
+                </p>
+              )}
               
               {/* Description */}
               <p className="text-gray-700 mb-6">
                 {product.description || "No detailed description available for this product."}
               </p>
               
+              {/* Links */}
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                {product.affiliateLink && (
+                  <Button className="bg-green-500 hover:bg-green-600 text-white flex-1" asChild>
+                    <a href={product.affiliateLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                      <ShoppingCart className="h-5 w-5" /> Buy Now
+                    </a>
+                  </Button>
+                )}
+                {product.productWebsiteLink && (
+                  <Button variant="outline" className="flex-1" asChild>
+                    <a href={product.productWebsiteLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                      <ExternalLink className="h-5 w-5" /> Visit Product Site
+                    </a>
+                  </Button>
+                )}
+              </div>
+
               {/* Additional Details */}
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
@@ -175,14 +202,14 @@ const ProductDetail = () => {
                   <p className="font-medium">{product.date}</p>
                 </div>
                 
-                {product.rating && (
+                {product.rating !== undefined && (
                   <div>
                     <p className="text-sm text-gray-500">Rating</p>
                     <div className="flex items-center">
                       <span className="font-medium mr-2">{product.rating}</span>
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
-                          <span key={i} className={`text-lg ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}>
+                          <span key={i} className={`text-lg ${product.rating && i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`}>
                             ★
                           </span>
                         ))}

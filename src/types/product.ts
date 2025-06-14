@@ -9,4 +9,7 @@ export type ProductType = {
   date: string;
   description?: string;
   rating?: number;
+  affiliateLink?: string;
+  productWebsiteLink?: string;
+  price?: number;
 };

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -42,7 +41,7 @@ const PassAndFail = () => {
           setError("Failed to fetch products.");
           setProducts([]);
         } else {
-          // Transform each product to match ProductType (snake_case -> camelCase for imageUrl)
+          // Transform each product to match ProductType
           const mappedProducts: ProductType[] = (data || []).map((prod: any) => ({
             id: prod.id,
             name: prod.name,
@@ -53,6 +52,9 @@ const PassAndFail = () => {
             date: prod.date,
             description: prod.description,
             rating: prod.rating,
+            affiliateLink: prod.affiliate_link,
+            productWebsiteLink: prod.product_website_link,
+            price: prod.price,
           }));
           setProducts(mappedProducts);
         }
@@ -167,6 +169,8 @@ const PassAndFail = () => {
                     category={product.category}
                     status={product.status}
                     date={product.date}
+                    price={product.price}
+                    affiliateLink={product.affiliateLink}
                   />
                 ))}
               </div>

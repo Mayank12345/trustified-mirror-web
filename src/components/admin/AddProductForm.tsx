@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,13 +27,15 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     rating: "",
     affiliateLink: "",
     productWebsiteLink: "",
-    price: ""
+    price: "",
+    amazonPrice: "",
+    websitePrice: "",
   });
 
   const reset = () => {
     setFields({
       name: "", brand: "", category: "", status: "PASS", date: "", description: "", rating: "",
-      affiliateLink: "", productWebsiteLink: "", price: ""
+      affiliateLink: "", productWebsiteLink: "", price: "", amazonPrice: "", websitePrice: "",
     });
     setImagePreview(null);
     setPdfs([]);
@@ -98,6 +99,8 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
           affiliate_link: fields.affiliateLink || null,
           product_website_link: fields.productWebsiteLink || null,
           price: fields.price ? Number(fields.price) : null,
+          amazon_price: fields.amazonPrice ? Number(fields.amazonPrice) : null,
+          website_price: fields.websitePrice ? Number(fields.websitePrice) : null,
         }
       ])
       .select()
@@ -200,6 +203,28 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
             value={fields.price}
             onChange={e => setFields(x => ({ ...x, price: e.target.value }))}
             placeholder="e.g. 29.99"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Amazon Price</label>
+          <Input
+            type="number"
+            min="0"
+            step="0.01"
+            value={fields.amazonPrice}
+            onChange={e => setFields(x => ({ ...x, amazonPrice: e.target.value }))}
+            placeholder="e.g. 25.50"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Website Price</label>
+          <Input
+            type="number"
+            min="0"
+            step="0.01"
+            value={fields.websitePrice}
+            onChange={e => setFields(x => ({ ...x, websitePrice: e.target.value }))}
+            placeholder="e.g. 21.99"
           />
         </div>
         <div>

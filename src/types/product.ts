@@ -12,4 +12,6 @@ export type ProductType = {
   affiliateLink?: string;
   productWebsiteLink?: string;
   price?: number;
+  amazonPrice?: number;
+  websitePrice?: number;
 };

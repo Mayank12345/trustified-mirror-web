@@ -48,6 +48,8 @@ const ProductDetail = () => {
               affiliateLink: data.affiliate_link ?? undefined,
               productWebsiteLink: data.product_website_link ?? undefined,
               price: data.price ?? undefined,
+              amazonPrice: data.amazon_price ?? undefined,
+              websitePrice: data.website_price ?? undefined,
             });
             setError(null);
           }
@@ -173,31 +175,55 @@ const ProductDetail = () => {
                 {statusIcons[product.status]} {product.status}
               </Badge>
 
-              {/* Price */}
-              {product.price !== undefined && product.price !== null && (
-                <p className="text-3xl font-bold text-green-600 mb-6">
-                  ${product.price.toFixed(2)}
-                </p>
-              )}
+              {/* Price: ONLY SHOW IF price exists and neither amazonPrice nor websitePrice exists */}
+              {product.price !== undefined && product.price !== null &&
+                product.amazonPrice === undefined && product.websitePrice === undefined && (
+                  <p className="text-3xl font-bold text-green-600 mb-6">
+                    ${product.price.toFixed(2)}
+                  </p>
+                )}
               
               {/* Description */}
               <p className="text-gray-700 mb-6">
                 {product.description || "No detailed description available for this product."}
               </p>
               
-              {/* Links */}
+              {/* Links & Prices */}
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
                 {effectiveAffiliateLink && (
-                  <Button className="bg-green-500 hover:bg-green-600 text-white flex-1" asChild>
-                    <a href={effectiveAffiliateLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                      <ShoppingCart className="h-5 w-5" /> Buy Now
+                  <Button
+                    className="bg-green-500 hover:bg-green-600 text-white flex-1 flex justify-between items-center"
+                    asChild
+                  >
+                    <a href={effectiveAffiliateLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between w-full gap-2">
+                      <span className="flex items-center gap-2">
+                        <ShoppingCart className="h-5 w-5" />
+                        Buy Now
+                      </span>
+                      {product.amazonPrice !== undefined && (
+                        <span className="ml-4 text-green-100 bg-green-700 px-3 py-1 rounded text-sm font-medium">
+                          ${product.amazonPrice.toFixed(2)}
+                        </span>
+                      )}
                     </a>
                   </Button>
                 )}
                 {effectiveProductWebsiteLink && (
-                  <Button variant="outline" className="flex-1" asChild>
-                    <a href={effectiveProductWebsiteLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                      <ExternalLink className="h-5 w-5" /> Visit Product Site
+                  <Button
+                    variant="outline"
+                    className="flex-1 flex justify-between items-center"
+                    asChild
+                  >
+                    <a href={effectiveProductWebsiteLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between w-full gap-2">
+                      <span className="flex items-center gap-2">
+                        <ExternalLink className="h-5 w-5" />
+                        Visit Product Site
+                      </span>
+                      {product.websitePrice !== undefined && (
+                        <span className="ml-4 text-gray-600 bg-gray-200 px-3 py-1 rounded text-sm font-medium">
+                          ${product.websitePrice.toFixed(2)}
+                        </span>
+                      )}
                     </a>
                   </Button>
                 )}

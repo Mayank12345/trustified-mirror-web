@@ -58,12 +58,12 @@ export const products: ProductType[] = [
     rating: 4.7
   },
   
-  // Original Products
+  // Updated: This "Souper Super Oats" is not a protein powder, categorize as "Oats"
   {
     id: 1,
     name: 'Souper Super Oats',
     brand: 'Soulfood',
-    category: 'Protein Powders',
+    category: 'Oats',
     imageUrl: 'https://trustified.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FSouperSuperOats.28b88fc9.webp&w=384&q=75',
     status: 'PASS',
     date: '2023-04-15',
@@ -74,7 +74,7 @@ export const products: ProductType[] = [
     id: 2,
     name: 'Gold Whey Protein',
     brand: 'NutriFit',
-    category: 'Protein Powders',
+    category: 'Whey Protein Powder',
     imageUrl: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=1000&auto=format&fit=crop',
     status: 'PASS',
     date: '2023-05-20',
@@ -360,4 +360,13 @@ export const products: ProductType[] = [
   },
 ];
 
-export const categories = ['All Categories', 'Protein Powders', 'Creatine', 'Mass Gainer', 'Omega 3', 'Pre-Workout', 'Whey Protein Powder'];
+export const categories = [
+  "All Categories",
+  "Whey Protein Powder",
+  "Protein Powders",
+  "Oats",
+  "Creatine",
+  "Mass Gainer",
+  "Omega 3",
+  "Pre-Workout"
+];

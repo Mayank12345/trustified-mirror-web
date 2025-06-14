@@ -26,7 +26,6 @@ const PassAndFail = () => {
   const [activeFilter, setActiveFilter] = useState<'PASS' | 'FAIL' | 'EXPIRED' | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [allRawProducts, setAllRawProducts] = useState<any[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,8 +42,6 @@ const PassAndFail = () => {
           setError("Failed to fetch products.");
           setProducts([]);
         } else {
-          setAllRawProducts(data || []);
-          console.log("[DEBUG] Raw products from Supabase:", data); // <<<<<< SEE ALL RAW DATA HERE
           // Transform each product to match ProductType (snake_case -> camelCase for imageUrl)
           const mappedProducts: ProductType[] = (data || []).map((prod: any) => ({
             id: prod.id,
@@ -58,10 +55,6 @@ const PassAndFail = () => {
             rating: prod.rating,
           }));
           setProducts(mappedProducts);
-
-          // Log all product categories from DB for debugging
-          const allCategories = mappedProducts.map(p => p.category);
-          console.log('[DEBUG] Categories from DB (raw):', allCategories);
         }
         setLoading(false);
       });
@@ -75,13 +68,9 @@ const PassAndFail = () => {
     }
   }, [searchParams]);
 
-  // Filtering logic with debug logs and improved category matching
+  // Filtering logic with improved category matching
   useEffect(() => {
     let results = [...products];
-    console.log('[DEBUG] Filter start:');
-    console.log('  searchTerm:', searchTerm);
-    console.log('  activeFilter:', activeFilter);
-    console.log('  selectedCategory:', selectedCategory);
 
     // Filter by search term
     if (searchTerm) {
@@ -89,13 +78,11 @@ const PassAndFail = () => {
         product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.brand?.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      console.log(`[DEBUG] Results after search filter: ${results.length}`);
     }
 
     // Status filter
     if (activeFilter !== 'ALL') {
       results = results.filter(product => product.status === activeFilter);
-      console.log(`[DEBUG] Results after status filter: ${results.length}`);
     }
 
     // Category filter (case- and whitespace-insensitive matching)
@@ -105,12 +92,9 @@ const PassAndFail = () => {
           product.category &&
           product.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
       );
-      console.log(`[DEBUG] Category to match: "${selectedCategory.trim().toLowerCase()}"`);
-      console.log(`[DEBUG] Results after category filter: ${results.length}`);
     }
 
     setFilteredProducts(results);
-    console.log('[DEBUG] Final filtered results:', results.map(p => p.name));
   }, [searchTerm, activeFilter, selectedCategory, products]);
 
   return (
@@ -209,15 +193,6 @@ const PassAndFail = () => {
                 </div>
               </div>
             )}
-
-            {/* ====== ADMIN DEBUG PANEL: Only for troubleshooting ====== */}
-            <div className="mt-16">
-              <div className="bg-gray-100 rounded p-4 shadow text-left">
-                <h3 className="text-base font-mono mb-2">[Admin Debug] Raw Products from Supabase</h3>
-                <pre className="overflow-x-auto text-xs bg-white p-2 rounded border max-h-96">{JSON.stringify(allRawProducts, null, 2)}</pre>
-              </div>
-            </div>
-            {/* ====== END ADMIN DEBUG PANEL ====== */}
           </div>
         </div>
       </main>

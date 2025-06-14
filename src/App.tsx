@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,7 @@ import GetCertified from "./pages/GetCertified";
 import ProductDetail from "./pages/ProductDetail";
 import HowWeTest from "./pages/HowWeTest";
 import NotFound from "./pages/NotFound";
+import AdminPage from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +74,7 @@ const App = () => {
               <Route path="/get-certified" element={<GetCertified />} />
               <Route path="/how-we-test" element={<HowWeTest />} />
               <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/admin" element={<AdminPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

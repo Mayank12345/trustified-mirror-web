@@ -270,17 +270,6 @@ export default function EditProductModal({ product, open, onClose, onUpdated }: 
                 />
               </div>
               <div>
-                <label className="block mb-1 font-medium">Price (USD)</label>
-                <Input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={fields.price}
-                  onChange={e => setFields(x => ({ ...x, price: e.target.value }))}
-                  placeholder="e.g. 29.99"
-                />
-              </div>
-              <div>
                 <label className="block mb-1 font-medium">Amazon Price</label>
                 <Input
                   type="number"

@@ -32,7 +32,6 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     rating: "",
     affiliateLink: "",
     productWebsiteLink: "",
-    price: "",
     amazonPrice: "",
     websitePrice: "",
   });
@@ -43,7 +42,7 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
   const reset = () => {
     setFields({
       name: "", brand: "", category: "", status: "PASS", date: "", description: "", rating: "",
-      affiliateLink: "", productWebsiteLink: "", price: "", amazonPrice: "", websitePrice: "",
+      affiliateLink: "", productWebsiteLink: "", amazonPrice: "", websitePrice: "",
     });
     setImagePreview(null);
     setPdfs([]);
@@ -119,7 +118,6 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
           image_url,
           affiliate_link: fields.affiliateLink || null,
           product_website_link: fields.productWebsiteLink || null,
-          price: fields.price ? Number(fields.price) : null,
           amazon_price: fields.amazonPrice ? Number(fields.amazonPrice) : null,
           website_price: fields.websitePrice ? Number(fields.websitePrice) : null,
         }
@@ -257,17 +255,6 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
             type="date"
             value={fields.date}
             onChange={e => setFields(x => ({ ...x, date: e.target.value }))}
-          />
-        </div>
-        <div>
-          <label className="block mb-1 font-medium">Price (USD)</label>
-          <Input
-            type="number"
-            min="0"
-            step="0.01"
-            value={fields.price}
-            onChange={e => setFields(x => ({ ...x, price: e.target.value }))}
-            placeholder="e.g. 29.99"
           />
         </div>
         <div>

@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -237,7 +236,6 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
           >
             <option value="PASS">PASS</option>
             <option value="FAIL">FAIL</option>
-            <option value="EXPIRED">EXPIRED</option>
           </select>
         </div>
         <div>
@@ -339,4 +337,3 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     </form>
   );
 }
-

@@ -42,8 +42,19 @@ const PassAndFail = () => {
           setError("Failed to fetch products.");
           setProducts([]);
         } else {
-          // Convert db fields (snake_case) to ProductType if needed (here columns match already)
-          setProducts(data as ProductType[] || []);
+          // Transform each product to match ProductType (snake_case -> camelCase for imageUrl)
+          const mappedProducts: ProductType[] = (data || []).map((prod: any) => ({
+            id: prod.id,
+            name: prod.name,
+            brand: prod.brand ?? '',
+            category: prod.category,
+            imageUrl: prod.image_url || '', // map image_url from db to imageUrl prop
+            status: prod.status,
+            date: prod.date,
+            description: prod.description,
+            rating: prod.rating,
+          }));
+          setProducts(mappedProducts);
         }
         setLoading(false);
       });
@@ -146,7 +157,7 @@ const PassAndFail = () => {
                   <ProductCard
                     key={product.id}
                     id={product.id}
-                    imageUrl={product.image_url || product.imageUrl || ""}
+                    imageUrl={product.imageUrl}
                     name={product.name}
                     brand={product.brand}
                     category={product.category}

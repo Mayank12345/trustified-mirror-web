@@ -1,8 +1,11 @@
+
 import React, { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { categories as allCategories } from "@/data/products";
 
 interface AddProductFormProps {
   onAdd?: () => void;
@@ -16,6 +19,9 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
   const [pdfs, setPdfs] = useState<File[]>([]);
   const imageRef = useRef<HTMLInputElement>(null);
   const pdfRef = useRef<HTMLInputElement>(null);
+
+  // Extract categories except "All Categories"
+  const categoryList = allCategories.filter(cat => cat !== "All Categories");
 
   const [fields, setFields] = useState({
     name: "",
@@ -32,6 +38,9 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     websitePrice: "",
   });
 
+  const [customCategoryMode, setCustomCategoryMode] = useState(false); // Determines if user wants to add new
+  const [customCategoryInput, setCustomCategoryInput] = useState("");   // Value for new cat
+
   const reset = () => {
     setFields({
       name: "", brand: "", category: "", status: "PASS", date: "", description: "", rating: "",
@@ -40,6 +49,8 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     setImagePreview(null);
     setPdfs([]);
     setProductId(null);
+    setCustomCategoryInput("");
+    setCustomCategoryMode(false);
     if (imageRef.current) imageRef.current.value = "";
     if (pdfRef.current) pdfRef.current.value = "";
   };
@@ -63,6 +74,17 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     e.preventDefault();
     setLoading(true);
     setProductId(null);
+
+    // Use selected or custom category
+    const categoryToUse = customCategoryMode
+      ? customCategoryInput.trim()
+      : fields.category.trim();
+
+    if (!categoryToUse) {
+      toast({ title: "Category required", description: "Please choose a category or add a new one." });
+      setLoading(false);
+      return;
+    }
 
     // 1. Upload image if provided
     let image_url = "";
@@ -90,7 +112,7 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
         {
           name: fields.name,
           brand: fields.brand,
-          category: fields.category,
+          category: categoryToUse,
           status: fields.status,
           date: fields.date ? fields.date : null,
           description: fields.description,
@@ -160,7 +182,51 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
         </div>
         <div>
           <label className="block mb-1 font-medium">Category</label>
-          <Input value={fields.category} onChange={e => setFields(x => ({ ...x, category: e.target.value }))} required />
+          {customCategoryMode ? (
+            <div className="flex gap-2">
+              <Input
+                value={customCategoryInput}
+                onChange={e => setCustomCategoryInput(e.target.value)}
+                placeholder="Add new category"
+                required
+              />
+              <Button
+                variant="outline"
+                type="button"
+                className="px-3 py-2"
+                onClick={() => {
+                  setCustomCategoryMode(false);
+                  setCustomCategoryInput("");
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
+          ) : (
+            <Select
+              value={fields.category}
+              onValueChange={val => {
+                if (val === "__add_new") {
+                  setCustomCategoryMode(true);
+                  setCustomCategoryInput("");
+                  setFields(x => ({ ...x, category: "" }));
+                } else {
+                  setFields(x => ({ ...x, category: val }));
+                }
+              }}
+              required
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categoryList.map(cat => (
+                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                ))}
+                <SelectItem value="__add_new" className="text-emerald-600">+ Add new category...</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
         </div>
         <div>
           <label className="block mb-1 font-medium">Status</label>
@@ -273,3 +339,4 @@ export default function AddProductForm({ onAdd }: AddProductFormProps) {
     </form>
   );
 }
+

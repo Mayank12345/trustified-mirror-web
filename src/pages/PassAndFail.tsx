@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -25,6 +26,7 @@ const PassAndFail = () => {
   const [activeFilter, setActiveFilter] = useState<'PASS' | 'FAIL' | 'EXPIRED' | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [allRawProducts, setAllRawProducts] = useState<any[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,6 +43,8 @@ const PassAndFail = () => {
           setError("Failed to fetch products.");
           setProducts([]);
         } else {
+          setAllRawProducts(data || []);
+          console.log("[DEBUG] Raw products from Supabase:", data); // <<<<<< SEE ALL RAW DATA HERE
           // Transform each product to match ProductType (snake_case -> camelCase for imageUrl)
           const mappedProducts: ProductType[] = (data || []).map((prod: any) => ({
             id: prod.id,
@@ -205,6 +209,15 @@ const PassAndFail = () => {
                 </div>
               </div>
             )}
+
+            {/* ====== ADMIN DEBUG PANEL: Only for troubleshooting ====== */}
+            <div className="mt-16">
+              <div className="bg-gray-100 rounded p-4 shadow text-left">
+                <h3 className="text-base font-mono mb-2">[Admin Debug] Raw Products from Supabase</h3>
+                <pre className="overflow-x-auto text-xs bg-white p-2 rounded border max-h-96">{JSON.stringify(allRawProducts, null, 2)}</pre>
+              </div>
+            </div>
+            {/* ====== END ADMIN DEBUG PANEL ====== */}
           </div>
         </div>
       </main>

@@ -12,7 +12,6 @@ const CallToAction = () => {
   };
 
   const handleDownloadApp = () => {
-    // Open the Google Play Store link (or could show a modal with both options)
     window.open('https://play.google.com/store/apps/details?id=com.trustified.app', '_blank');
   };
 
@@ -32,21 +31,21 @@ const CallToAction = () => {
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
                 <Button 
                   size="lg" 
-                  className="bg-white text-green-600 hover:bg-gray-100 focus:ring-4 focus:ring-white/20"
+                  className="bg-white text-green-600 hover:bg-gray-100 focus:ring-4 focus:ring-white/20 font-semibold px-8 py-4"
                   onClick={handleCheckProducts}
                   aria-label="Check products now - view testing results"
+                  variant="ghost" // variant is ignored, pure style override
                 >
                   Check Products Now
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline" 
-                  className="text-white border-white hover:bg-white/10 focus:ring-4 focus:ring-white/20 flex items-center gap-2"
+                  className="bg-white text-green-600 hover:bg-gray-100 focus:ring-4 focus:ring-white/20 font-semibold px-8 py-4"
                   onClick={handleDownloadApp}
                   aria-label="Download Trustified mobile app"
+                  variant="ghost"
                 >
                   Download App
-                  <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
             </div>

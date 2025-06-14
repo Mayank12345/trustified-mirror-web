@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ProductType } from '@/types/product';
@@ -26,11 +25,11 @@ const ProductDetail = () => {
       setLoading(true);
       setError(null);
 
-      // Fetch product from Supabase
+      // Fetch product from Supabase using Number(id)
       supabase
         .from("products")
         .select("*")
-        .eq("id", id)
+        .eq("id", Number(id))
         .maybeSingle()
         .then(({ data, error }) => {
           if (error || !data) {
@@ -56,7 +55,7 @@ const ProductDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    // Fetch PDF name for the download button
+    // Fetch PDF name for the download button using Number(id)
     const fetchPdfName = async () => {
       if (!id) {
         setPdfName(null);
@@ -65,7 +64,7 @@ const ProductDetail = () => {
       const { data, error } = await supabase
         .from('product_pdfs')
         .select('pdf_name')
-        .eq('product_id', id)
+        .eq('product_id', Number(id))
         .maybeSingle();
 
       if (data && data.pdf_name) {
@@ -424,4 +423,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-

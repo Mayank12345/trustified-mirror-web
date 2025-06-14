@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Shield } from 'lucide-react';
@@ -45,6 +44,7 @@ const CallToAction = () => {
                   onClick={handleDownloadApp}
                   aria-label="Download Trustified mobile app"
                 >
+                  <ArrowRight className="h-4 w-4 mr-2" />
                   Download App
                 </Button>
               </div>

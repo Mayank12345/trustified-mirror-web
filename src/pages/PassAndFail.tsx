@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -48,13 +47,17 @@ const PassAndFail = () => {
             name: prod.name,
             brand: prod.brand ?? '',
             category: prod.category,
-            imageUrl: prod.image_url || '', // map image_url from db to imageUrl prop
+            imageUrl: prod.image_url || '',
             status: prod.status,
             date: prod.date,
             description: prod.description,
             rating: prod.rating,
           }));
           setProducts(mappedProducts);
+
+          // Log all product categories from DB for debugging
+          const allCategories = mappedProducts.map(p => p.category);
+          console.log('[DEBUG] Categories from DB (raw):', allCategories);
         }
         setLoading(false);
       });
@@ -68,9 +71,13 @@ const PassAndFail = () => {
     }
   }, [searchParams]);
 
-  // Filtering logic
+  // Filtering logic with debug logs and improved category matching
   useEffect(() => {
     let results = [...products];
+    console.log('[DEBUG] Filter start:');
+    console.log('  searchTerm:', searchTerm);
+    console.log('  activeFilter:', activeFilter);
+    console.log('  selectedCategory:', selectedCategory);
 
     // Filter by search term
     if (searchTerm) {
@@ -78,19 +85,28 @@ const PassAndFail = () => {
         product.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.brand?.toLowerCase().includes(searchTerm.toLowerCase())
       );
+      console.log(`[DEBUG] Results after search filter: ${results.length}`);
     }
 
     // Status filter
     if (activeFilter !== 'ALL') {
       results = results.filter(product => product.status === activeFilter);
+      console.log(`[DEBUG] Results after status filter: ${results.length}`);
     }
 
-    // Category filter
+    // Category filter (case- and whitespace-insensitive matching)
     if (selectedCategory !== 'All Categories') {
-      results = results.filter(product => product.category === selectedCategory);
+      results = results.filter(
+        product =>
+          product.category &&
+          product.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
+      );
+      console.log(`[DEBUG] Category to match: "${selectedCategory.trim().toLowerCase()}"`);
+      console.log(`[DEBUG] Results after category filter: ${results.length}`);
     }
 
     setFilteredProducts(results);
+    console.log('[DEBUG] Final filtered results:', results.map(p => p.name));
   }, [searchTerm, activeFilter, selectedCategory, products]);
 
   return (
@@ -201,4 +217,3 @@ const PassAndFail = () => {
 };
 
 export default PassAndFail;
-

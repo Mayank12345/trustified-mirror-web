@@ -203,7 +203,7 @@ export const products: ProductType[] = [
     rating: 2.7
   },
   
-  // ADDED PRODUCTS FROM SCREENSHOT BELOW
+  // ADDED PRODUCTS FROM SCREENSHOT START
   {
     id: 201,
     name: "Avvatar 100% Performance Whey",
@@ -248,8 +248,6 @@ export const products: ProductType[] = [
     description: "Failed purity or label claim tests.",
     rating: 2.9
   },
-  // ADDED PRODUCTS FROM SCREENSHOT START
-  // All image filenames below are a logical guess and must be created in public/lovable-uploads/ as crops.
   {
     id: 205,
     name: "Bigmuscles Nutrition Frotein Whey",
@@ -360,7 +358,6 @@ export const products: ProductType[] = [
     description: "Nutrabay Gold Whey Isolate, purity verified.",
     rating: 4.7
   },
-  // ... continue for each product identified in screenshot, incrementing `id` and using cropped image for `imageUrl` ...
 ];
 
 export const categories = ['All Categories', 'Protein Powders', 'Creatine', 'Mass Gainer', 'Omega 3', 'Pre-Workout', 'Whey Protein Powder'];

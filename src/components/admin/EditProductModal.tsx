@@ -177,7 +177,6 @@ export default function EditProductModal({ product, open, onClose, onUpdated }: 
   return (
     <Dialog open={open} onOpenChange={v => { if (!v) onClose(); }}>
       <DialogContent>
-        {/* Make the modal content scrollable if it’s too tall */}
         <div className="max-h-[70vh] md:max-h-[75vh] overflow-y-auto pr-2">
           <form onSubmit={handleUpdate} className="space-y-3">
             <h2 className="text-lg font-bold mb-2">Edit Product</h2>

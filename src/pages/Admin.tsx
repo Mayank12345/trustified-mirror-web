@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import AddProductForm from "@/components/admin/AddProductForm";
@@ -7,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ProductFieldQuickUpdater from "@/components/admin/ProductFieldQuickUpdater";
+
+const DEMO_ADMIN_EMAIL = "admin@example.com"; // Replace with your demo/dev admin email
 
 // Main Admin Dashboard Page
 export default function AdminPage() {

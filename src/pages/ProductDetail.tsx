@@ -1,6 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { products } from '@/data/products';
 import { ProductType } from '@/types/product';
 import Navbar from '@/components/Navbar';
 import { Badge } from '@/components/ui/badge';
@@ -9,18 +9,72 @@ import { Check, X, Package, ArrowLeft, FileText } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from '@/components/ui/separator';
+import { supabase } from "@/integrations/supabase/client";
+import { usePdfDownload } from "@/hooks/usePdfDownload";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<ProductType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [pdfName, setPdfName] = useState<string | null>(null);
+
+  const { downloadPdf, isDownloading } = usePdfDownload();
 
   useEffect(() => {
     if (id) {
-      const foundProduct = products.find(p => p.id === Number(id));
-      setProduct(foundProduct || null);
-      setLoading(false);
+      setLoading(true);
+      setError(null);
+
+      // Fetch product from Supabase
+      supabase
+        .from("products")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle()
+        .then(({ data, error }) => {
+          if (error || !data) {
+            setProduct(null);
+            setError('Product not found');
+          } else {
+            setProduct({
+              id: data.id,
+              name: data.name,
+              brand: data.brand ?? '',
+              category: data.category,
+              imageUrl: data.image_url || "",
+              status: data.status as 'PASS' | 'FAIL' | 'EXPIRED',
+              date: data.date,
+              description: data.description ?? '',
+              rating: data.rating ?? undefined,
+            });
+            setError(null);
+          }
+          setLoading(false);
+        });
     }
+  }, [id]);
+
+  useEffect(() => {
+    // Fetch PDF name for the download button
+    const fetchPdfName = async () => {
+      if (!id) {
+        setPdfName(null);
+        return;
+      }
+      const { data, error } = await supabase
+        .from('product_pdfs')
+        .select('pdf_name')
+        .eq('product_id', id)
+        .maybeSingle();
+
+      if (data && data.pdf_name) {
+        setPdfName(data.pdf_name);
+      } else {
+        setPdfName(null);
+      }
+    };
+    fetchPdfName();
   }, [id]);
 
   const statusColors = {
@@ -50,14 +104,14 @@ const ProductDetail = () => {
     );
   }
 
-  if (!product) {
+  if (error || !product) {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
         <main className="flex-1 py-8">
           <div className="container mx-auto px-4">
             <div className="flex flex-col justify-center items-center h-64">
-              <p className="text-lg text-gray-500 mb-4">Product not found</p>
+              <p className="text-lg text-gray-500 mb-4">{error || "Product not found"}</p>
               <Button asChild>
                 <Link to="/passandfail">Return to products</Link>
               </Button>
@@ -186,8 +240,18 @@ const ProductDetail = () => {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between">
                     <CardTitle>Detailed Laboratory Report</CardTitle>
-                    <Button variant="outline" className="flex items-center gap-2">
-                      <FileText className="h-4 w-4" /> Download PDF
+                    <Button 
+                      variant="outline" 
+                      className="flex items-center gap-2"
+                      disabled={!pdfName || isDownloading}
+                      onClick={() => product && downloadPdf(product.id, product.name)}
+                    >
+                      <FileText className="h-4 w-4" /> 
+                      {isDownloading
+                        ? 'Preparing...'
+                        : pdfName 
+                          ? `Download PDF (${pdfName})`
+                          : "PDF Not Available"}
                     </Button>
                   </CardHeader>
                   <CardContent>
@@ -360,3 +424,4 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+

@@ -201,6 +201,52 @@ export const products: ProductType[] = [
     date: '2023-02-11',
     description: 'Plant-based omega-3 from algae oil. Claims of DHA/EPA content not verified in lab testing.',
     rating: 2.7
+  },
+  
+  // ADDED PRODUCTS FROM SCREENSHOT BELOW
+  {
+    id: 201,
+    name: "Avvatar 100% Performance Whey",
+    brand: "Avvatar",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/b2df8497-c92f-4a43-860b-8ecf75d310c0.png",
+    status: "PASS",
+    date: "2024-05-01",
+    description: "Tested and passed for purity and protein content.",
+    rating: 4.8
+  },
+  {
+    id: 202,
+    name: "Muscleblaze Biozyme Performance Whey",
+    brand: "Muscleblaze",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/b2df8497-c92f-4a43-860b-8ecf75d310c0.png",
+    status: "PASS",
+    date: "2024-04-27",
+    description: "Biozyme Performance series verified for quality.",
+    rating: 4.7
+  },
+  {
+    id: 203,
+    name: "GNC Pro Performance 100% Whey Protein",
+    brand: "GNC",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/b2df8497-c92f-4a43-860b-8ecf75d310c0.png",
+    status: "PASS",
+    date: "2024-04-23",
+    description: "Third-party tested for protein and safety.",
+    rating: 4.6
+  },
+  {
+    id: 204,
+    name: "AS-IT-IS Nutrition Whey Protein",
+    brand: "AS-IT-IS Nutrition",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/b2df8497-c92f-4a43-860b-8ecf75d310c0.png",
+    status: "FAIL",
+    date: "2024-04-21",
+    description: "Failed purity or label claim tests.",
+    rating: 2.9
   }
 ];
 

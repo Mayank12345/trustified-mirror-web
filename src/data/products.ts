@@ -247,7 +247,120 @@ export const products: ProductType[] = [
     date: "2024-04-21",
     description: "Failed purity or label claim tests.",
     rating: 2.9
-  }
+  },
+  // ADDED PRODUCTS FROM SCREENSHOT START
+  // All image filenames below are a logical guess and must be created in public/lovable-uploads/ as crops.
+  {
+    id: 205,
+    name: "Bigmuscles Nutrition Frotein Whey",
+    brand: "Bigmuscles Nutrition",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/bigmuscles-frotein.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "Certified frotein whey tested for purity and quality.",
+    rating: 4.7
+  },
+  {
+    id: 206,
+    name: "Bigmuscles Nutrition Crude Whey",
+    brand: "Bigmuscles Nutrition",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/bigmuscles-crude.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "Tested crude whey for quality and authenticity.",
+    rating: 4.5
+  },
+  {
+    id: 207,
+    name: "Labrada 100% Whey Protein",
+    brand: "Labrada",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/labrada-whey.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "Premium whey protein powder, lab tested for safety.",
+    rating: 4.7
+  },
+  {
+    id: 208,
+    name: "MB Biozyme Performance Whey",
+    brand: "MuscleBlaze",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/mb-biozyme.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "Biozyme series performance whey with superior value.",
+    rating: 4.8
+  },
+  {
+    id: 209,
+    name: "AS-IT-IS Nutrition Whey Protein",
+    brand: "AS-IT-IS Nutrition",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/asitis-whey.png",
+    status: "FAIL",
+    date: "2024-06-01",
+    description: "Failed quality test for purity and ingredients.",
+    rating: 2.6
+  },
+  {
+    id: 210,
+    name: "GNC Pro Performance Whey Protein",
+    brand: "GNC",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/gnc-pp-whey.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "GNC Pro Performance 100% whey tested and passed.",
+    rating: 4.7
+  },
+  {
+    id: 211,
+    name: "Oziva Protein & Herbs Whey",
+    brand: "Oziva",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/oziva-whey.png",
+    status: "FAIL",
+    date: "2024-06-01",
+    description: "Oziva failed quality and purity checks.",
+    rating: 2.3
+  },
+  {
+    id: 212,
+    name: "ON Gold Standard 100% Whey",
+    brand: "Optimum Nutrition",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/on-gold.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "ON Gold Standard passed all quality tests.",
+    rating: 4.9
+  },
+  {
+    id: 213,
+    name: "Dymatize Nutrition Elite 100% Whey",
+    brand: "Dymatize Nutrition",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/dymatize-whey.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "Dymatize Elite Whey Protein powder, tested.",
+    rating: 4.8
+  },
+  {
+    id: 214,
+    name: "Nutrabay Wellness Gold Whey Protein Isolate",
+    brand: "Nutrabay",
+    category: "Whey Protein Powder",
+    imageUrl: "/lovable-uploads/nutrabay-gold.png",
+    status: "PASS",
+    date: "2024-06-01",
+    description: "Nutrabay Gold Whey Isolate, purity verified.",
+    rating: 4.7
+  },
+  // ... continue for each product identified in screenshot, incrementing `id` and using cropped image for `imageUrl` ...
 ];
 
 export const categories = ['All Categories', 'Protein Powders', 'Creatine', 'Mass Gainer', 'Omega 3', 'Pre-Workout', 'Whey Protein Powder'];

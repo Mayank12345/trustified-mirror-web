@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,26 +12,28 @@ interface ProductCardProps {
   name: string;
   brand: string;
   category: string;
-  status: 'PASS' | 'FAIL' | 'EXPIRED';
+  status: 'PASS' | 'FAIL' | 'EXPIRED' | 'GOLD';
   date?: string;
   price?: number;
   affiliateLink?: string;
 }
 
+const statusColors = {
+  PASS: "bg-green-500 text-white",
+  FAIL: "bg-red-500 text-white",
+  EXPIRED: "bg-amber-500 text-white",
+  GOLD: "bg-yellow-500 text-white",
+};
+
+const statusIcons = {
+  PASS: <Check className="h-4 w-4" />,
+  FAIL: <X className="h-4 w-4" />,
+  EXPIRED: <Package className="h-4 w-4" />,
+  GOLD: <Check className="h-4 w-4" />, // You might use a different icon for GOLD (e.g. Star)
+};
+
 const ProductCard = ({ id, imageUrl, name, brand, category, status, date, price, affiliateLink }: ProductCardProps) => {
   const { downloadPdf, isDownloading } = usePdfDownload();
-
-  const statusColors = {
-    PASS: "bg-green-500 text-white",
-    FAIL: "bg-red-500 text-white",
-    EXPIRED: "bg-amber-500 text-white",
-  };
-
-  const statusIcons = {
-    PASS: <Check className="h-4 w-4" />,
-    FAIL: <X className="h-4 w-4" />,
-    EXPIRED: <Package className="h-4 w-4" />,
-  };
 
   const handleDownloadPdf = async () => {
     await downloadPdf(id, name);
@@ -61,7 +62,7 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date, price,
           <p className="text-sm text-gray-500 mb-1">{category}</p>
           
           {/* Product Name */}
-          <h3 className="font-semibold text-lg text-gray-900 line-clamp-2 mb-1 h-14">{name}</h3> {/* Increased height for 2 lines */}
+          <h3 className="font-semibold text-lg text-gray-900 line-clamp-2 mb-1 h-14">{name}</h3>
           
           {/* Brand */}
           <p className="text-sm text-gray-600 mb-2">by {brand}</p>

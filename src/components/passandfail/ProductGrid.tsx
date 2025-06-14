@@ -24,6 +24,8 @@ const ProductGrid = ({ products }: ProductGridProps) => {
           category={product.category}
           status={product.status}
           date={product.date}
+          price={product.price}
+          affiliateLink={product.affiliateLink}
         />
       ))}
     </div>

@@ -90,6 +90,14 @@ const ProductDetail = () => {
     EXPIRED: <Package className="h-5 w-5" />,
   };
 
+  // Default demo links
+  const dummyAffiliateLink = "https://www.amazon.com/dp/B08N5WRWNW?tag=dummy-aff";
+  const dummyProductWebsiteLink = "https://www.avvatarindia.com/shop/avvatar-performance-whey/";
+
+  // choose existing or default dummy links
+  const effectiveAffiliateLink = product?.affiliateLink || dummyAffiliateLink;
+  const effectiveProductWebsiteLink = product?.productWebsiteLink || dummyProductWebsiteLink;
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
@@ -179,16 +187,16 @@ const ProductDetail = () => {
               
               {/* Links */}
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                {product.affiliateLink && (
+                {effectiveAffiliateLink && (
                   <Button className="bg-green-500 hover:bg-green-600 text-white flex-1" asChild>
-                    <a href={product.affiliateLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <a href={effectiveAffiliateLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                       <ShoppingCart className="h-5 w-5" /> Buy Now
                     </a>
                   </Button>
                 )}
-                {product.productWebsiteLink && (
+                {effectiveProductWebsiteLink && (
                   <Button variant="outline" className="flex-1" asChild>
-                    <a href={product.productWebsiteLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <a href={effectiveProductWebsiteLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                       <ExternalLink className="h-5 w-5" /> Visit Product Site
                     </a>
                   </Button>

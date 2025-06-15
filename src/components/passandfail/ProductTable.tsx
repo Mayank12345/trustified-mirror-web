@@ -9,6 +9,21 @@ interface ProductTableProps {
 }
 
 const ProductTable = ({ products }: ProductTableProps) => {
+  const getStatusBadgeClass = (status: string) => {
+    switch (status) {
+      case "PASS":
+        return "bg-green-500 text-white";
+      case "FAIL":
+        return "bg-red-500 text-white";
+      case "EXPIRED":
+        return "bg-amber-500 text-white";
+      case "GOLD":
+        return "bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold";
+      default:
+        return "bg-gray-500 text-white";
+    }
+  };
+
   return (
     <div className="mt-16 hidden md:block">
       <h2 className="text-xl font-medium mb-4">Certification Records</h2>
@@ -29,15 +44,7 @@ const ProductTable = ({ products }: ProductTableProps) => {
               <TableCell>{product.brand}</TableCell>
               <TableCell>{product.category}</TableCell>
               <TableCell>
-                <Badge 
-                  className={`${
-                    product.status === 'PASS' 
-                      ? 'bg-green-500' 
-                      : product.status === 'FAIL'
-                      ? 'bg-red-500'
-                      : 'bg-amber-500'
-                  } text-white`}
-                >
+                <Badge className={getStatusBadgeClass(product.status)}>
                   {product.status}
                 </Badge>
               </TableCell>

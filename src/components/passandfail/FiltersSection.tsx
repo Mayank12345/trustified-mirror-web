@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils';
 interface FiltersSectionProps {
   selectedCategory: string;
   setSelectedCategory: (value: string) => void;
-  activeFilter: 'PASS' | 'FAIL' | 'EXPIRED' | 'ALL';
-  setActiveFilter: (value: 'PASS' | 'FAIL' | 'EXPIRED' | 'ALL') => void;
+  activeFilter: 'PASS' | 'FAIL' | 'EXPIRED' | 'GOLD' | 'ALL';
+  setActiveFilter: (value: 'PASS' | 'FAIL' | 'EXPIRED' | 'GOLD' | 'ALL') => void;
   categories: string[];
 }
 
@@ -62,6 +62,18 @@ const FiltersSection = ({
           )}
         >
           Pass
+        </Button>
+        <Button
+          onClick={() => setActiveFilter('GOLD')}
+          variant={activeFilter === 'GOLD' ? "default" : "outline"}
+          className={cn(
+            "rounded-full px-6 py-2 text-sm font-medium transition-colors",
+            activeFilter === 'GOLD' 
+              ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold hover:from-yellow-500 hover:to-yellow-600" 
+              : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
+          )}
+        >
+          Gold
         </Button>
         <Button
           onClick={() => setActiveFilter('FAIL')}

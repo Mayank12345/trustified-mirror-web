@@ -23,7 +23,7 @@ const categories = [
 const PassAndFail = () => {
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeFilter, setActiveFilter] = useState<'PASS' | 'FAIL' | 'EXPIRED' | 'ALL'>('ALL');
+  const [activeFilter, setActiveFilter] = useState<'PASS' | 'FAIL' | 'EXPIRED' | 'GOLD' | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [products, setProducts] = useState<ProductType[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
@@ -83,13 +83,9 @@ const PassAndFail = () => {
       );
     }
 
-    // Status filter (treat GOLD as PASS)
+    // Status filter - now GOLD is separate from PASS
     if (activeFilter !== 'ALL') {
-      if (activeFilter === 'PASS') {
-        results = results.filter(product => product.status === 'PASS' || product.status === 'GOLD');
-      } else {
-        results = results.filter(product => product.status === activeFilter);
-      }
+      results = results.filter(product => product.status === activeFilter);
     }
 
     // Category filter (case- and whitespace-insensitive matching)
@@ -111,23 +107,23 @@ const PassAndFail = () => {
       </header>
 
       {/* Compact Hero Section */}
-      <div className="bg-gradient-to-br from-green-500 to-green-600 text-white py-12">
+      <div className="bg-gradient-to-br from-green-500 to-green-600 text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
             Discover Product Testing Results
           </h1>
-          <p className="text-lg text-green-100 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm text-green-100 max-w-2xl mx-auto leading-relaxed">
             Transparent blind testing results for supplement products. See which products pass our rigorous quality standards.
           </p>
         </div>
       </div>
 
-      <main className="flex-1 py-6" role="main">
+      <main className="flex-1 py-4" role="main">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col gap-4 max-w-7xl mx-auto">
+          <div className="flex flex-col gap-3 max-w-7xl mx-auto">
             {/* Compact Search and Filters */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <h2 className="text-xl font-bold text-gray-900">Product Results</h2>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <h2 className="text-lg font-bold text-gray-900">Product Results</h2>
               <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
 
@@ -141,10 +137,10 @@ const PassAndFail = () => {
 
             {/* Loading/Error/Empty states */}
             {loading && (
-              <div className="text-center py-12">
-                <div className="bg-white rounded-lg shadow-sm p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Loading...</h3>
-                  <p className="text-gray-500 mb-4">
+              <div className="text-center py-8">
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Loading...</h3>
+                  <p className="text-gray-500 text-sm">
                     Fetching product data from the server.
                   </p>
                 </div>
@@ -152,10 +148,10 @@ const PassAndFail = () => {
             )}
 
             {error && (
-              <div className="text-center py-12">
-                <div className="bg-white rounded-lg shadow-sm p-8">
-                  <h3 className="text-xl font-semibold text-red-600 mb-3">{error}</h3>
-                  <p className="text-gray-500 mb-4">
+              <div className="text-center py-8">
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <h3 className="text-lg font-semibold text-red-600 mb-2">{error}</h3>
+                  <p className="text-gray-500 text-sm">
                     Please try refreshing the page.
                   </p>
                 </div>
@@ -163,7 +159,7 @@ const PassAndFail = () => {
             )}
 
             {!loading && !error && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
                 {filteredProducts.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -183,10 +179,10 @@ const PassAndFail = () => {
 
             {/* Compact Empty State */}
             {!loading && !error && filteredProducts.length === 0 && (
-              <div className="text-center py-12">
-                <div className="bg-white rounded-lg shadow-sm p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">No Products Found</h3>
-                  <p className="text-gray-500 mb-4">
+              <div className="text-center py-8">
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">No Products Found</h3>
+                  <p className="text-gray-500 text-sm mb-3">
                     No products match your current search criteria. Try adjusting your filters or search terms.
                   </p>
                   <button
@@ -195,7 +191,7 @@ const PassAndFail = () => {
                       setActiveFilter('ALL');
                       setSelectedCategory('All Categories');
                     }}
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors focus:ring-4 focus:ring-green-300"
+                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors focus:ring-4 focus:ring-green-300 text-sm"
                   >
                     Clear All Filters
                   </button>

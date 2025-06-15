@@ -3,13 +3,28 @@ import React, { useState } from 'react';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/components/ui/use-toast';
+import { useRateLimit } from '@/hooks/useRateLimit';
+import SecureInput from '@/components/ui/secure-input';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // Rate limiting: max 3 attempts per 5 minutes
+  const { checkRateLimit, isLimited } = useRateLimit({
+    maxAttempts: 3,
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    errorMessage: "Too many newsletter signup attempts. Please wait 5 minutes before trying again."
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check rate limit first
+    if (!checkRateLimit()) {
+      return;
+    }
+    
     if (!email.trim()) {
       toast({
         title: "Please enter an email address.",
@@ -17,6 +32,7 @@ const Footer = () => {
       });
       return;
     }
+    
     setLoading(true);
     try {
       const { error } = await supabase
@@ -55,24 +71,34 @@ const Footer = () => {
           onSubmit={handleSubmit}
           className="flex flex-col sm:flex-row max-w-md mx-auto mb-8"
         >
-          <input
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            disabled={loading}
-            placeholder="email@example.com"
-            className="flex-1 px-4 py-3 text-gray-700 bg-white border-0 rounded-l-lg sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-300"
-            required
-            aria-label="Email"
-          />
+          <div className="flex-1 sm:mr-2 mb-2 sm:mb-0">
+            <SecureInput
+              type="email"
+              value={email}
+              onChange={setEmail}
+              placeholder="email@example.com"
+              required
+              maxLength={254}
+              disabled={loading || isLimited}
+              className="px-4 py-3 text-gray-700 bg-white border-0 rounded-l-lg sm:rounded-r-none"
+            />
+          </div>
           <button
             type="submit"
-            disabled={loading}
-            className="bg-black text-white px-8 py-3 rounded-r-lg sm:rounded-l-none hover:bg-gray-800 transition-colors font-semibold"
+            disabled={loading || isLimited}
+            className="bg-black text-white px-8 py-3 rounded-r-lg sm:rounded-l-none hover:bg-gray-800 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Joining..." : "Join"}
+            {loading ? "Joining..." : isLimited ? "Wait..." : "Join"}
           </button>
         </form>
+        
+        {/* Rate limit indicator */}
+        {isLimited && (
+          <p className="text-sm text-red-200 mb-4">
+            Rate limit reached. Please wait before submitting again.
+          </p>
+        )}
+        
         {/* Contact Email and Social Media */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white">
           <p className="text-lg">

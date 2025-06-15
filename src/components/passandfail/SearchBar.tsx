@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
-import EnhancedSearchInput from '@/components/ui/enhanced-input';
+import SecureInput from '@/components/ui/secure-input';
 
 interface SearchBarProps {
   searchTerm: string;
@@ -12,11 +12,15 @@ interface SearchBarProps {
 const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
   return (
     <div className="flex gap-2 w-full max-w-md">
-      <EnhancedSearchInput
-        value={searchTerm}
-        onChange={setSearchTerm}
-        placeholder="Search products..."
-      />
+      <div className="flex-1">
+        <SecureInput
+          value={searchTerm}
+          onChange={setSearchTerm}
+          placeholder="Search products..."
+          maxLength={100}
+          className="h-12 rounded-lg border-gray-300 focus:border-green-500 focus:ring-green-500"
+        />
+      </div>
       <Button 
         variant="default" 
         size="icon"

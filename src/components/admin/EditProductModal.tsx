@@ -246,7 +246,8 @@ export default function EditProductModal({ product, open, onClose, onUpdated }: 
                 >
                   <option value="PASS">PASS</option>
                   <option value="FAIL">FAIL</option>
-                  <option value="GOLD">Gold</option>
+                  <option value="EXPIRED">EXPIRED</option>
+                  <option value="GOLD">GOLD</option>
                 </select>
               </div>
               <div>

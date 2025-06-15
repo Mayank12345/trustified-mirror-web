@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -109,24 +110,24 @@ const PassAndFail = () => {
         <Navbar />
       </header>
 
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-green-500 to-green-600 text-white py-16">
+      {/* Compact Hero Section */}
+      <div className="bg-gradient-to-br from-green-500 to-green-600 text-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-3">
             Discover Product Testing Results
           </h1>
-          <p className="text-xl text-green-100 max-w-3xl mx-auto leading-relaxed">
-            Transparent blind testing results for supplement products. See which products pass our rigorous quality standards and which ones don't.
+          <p className="text-lg text-green-100 max-w-2xl mx-auto leading-relaxed">
+            Transparent blind testing results for supplement products. See which products pass our rigorous quality standards.
           </p>
         </div>
       </div>
 
-      <main className="flex-1 py-8" role="main">
+      <main className="flex-1 py-6" role="main">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-            {/* Search and Filters */}
+          <div className="flex flex-col gap-4 max-w-7xl mx-auto">
+            {/* Compact Search and Filters */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <h2 className="text-2xl font-bold text-gray-900">Product Results</h2>
+              <h2 className="text-xl font-bold text-gray-900">Product Results</h2>
               <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
 
@@ -140,10 +141,10 @@ const PassAndFail = () => {
 
             {/* Loading/Error/Empty states */}
             {loading && (
-              <div className="text-center py-16">
-                <div className="bg-white rounded-lg shadow-sm p-12">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">Loading...</h3>
-                  <p className="text-lg text-gray-500 mb-6">
+              <div className="text-center py-12">
+                <div className="bg-white rounded-lg shadow-sm p-8">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Loading...</h3>
+                  <p className="text-gray-500 mb-4">
                     Fetching product data from the server.
                   </p>
                 </div>
@@ -151,10 +152,10 @@ const PassAndFail = () => {
             )}
 
             {error && (
-              <div className="text-center py-16">
-                <div className="bg-white rounded-lg shadow-sm p-12">
-                  <h3 className="text-2xl font-semibold text-red-600 mb-4">{error}</h3>
-                  <p className="text-lg text-gray-500 mb-6">
+              <div className="text-center py-12">
+                <div className="bg-white rounded-lg shadow-sm p-8">
+                  <h3 className="text-xl font-semibold text-red-600 mb-3">{error}</h3>
+                  <p className="text-gray-500 mb-4">
                     Please try refreshing the page.
                   </p>
                 </div>
@@ -162,7 +163,7 @@ const PassAndFail = () => {
             )}
 
             {!loading && !error && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filteredProducts.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -180,12 +181,12 @@ const PassAndFail = () => {
               </div>
             )}
 
-            {/* Empty State */}
+            {/* Compact Empty State */}
             {!loading && !error && filteredProducts.length === 0 && (
-              <div className="text-center py-16">
-                <div className="bg-white rounded-lg shadow-sm p-12">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">No Products Found</h3>
-                  <p className="text-lg text-gray-500 mb-6">
+              <div className="text-center py-12">
+                <div className="bg-white rounded-lg shadow-sm p-8">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">No Products Found</h3>
+                  <p className="text-gray-500 mb-4">
                     No products match your current search criteria. Try adjusting your filters or search terms.
                   </p>
                   <button

@@ -41,78 +41,78 @@ const ProductCard = ({ id, imageUrl, name, brand, category, status, date, price,
   };
 
   return (
-    <Card className="overflow-hidden transition-all duration-300 hover:shadow-2xl border border-gray-200 rounded-2xl flex flex-col group hover:-translate-y-2 bg-white">
-      {/* Product Image Container with enhanced styling */}
-      <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 p-6 flex items-center justify-center">
+    <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-200 rounded-xl flex flex-col group hover:-translate-y-1 bg-white h-full">
+      {/* Compact Product Image Container */}
+      <div className="relative h-44 bg-gradient-to-br from-gray-50 to-gray-100 p-4 flex items-center justify-center">
         <img 
           src={imageUrl} 
           alt={name}
           className="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute top-4 right-4 z-10">
-          <Badge className={`${statusColors[status]} px-4 py-2 font-bold shadow-xl flex items-center gap-2 rounded-xl`}>
+        <div className="absolute top-3 right-3 z-10">
+          <Badge className={`${statusColors[status]} px-3 py-1 font-bold shadow-lg flex items-center gap-2 rounded-lg text-xs`}>
             {statusIcons[status]} {status}
           </Badge>
         </div>
       </div>
       
-      <CardContent className="p-6 flex flex-col flex-grow">
-        {/* Product Information with enhanced typography */}
-        <div className="mb-6 flex-grow">
+      <CardContent className="p-4 flex flex-col flex-grow">
+        {/* Compact Product Information */}
+        <div className="mb-4 flex-grow">
           {/* Category */}
-          <p className="text-sm font-medium text-green-600 mb-2 uppercase tracking-wide">{category}</p>
+          <p className="text-xs font-medium text-green-600 mb-2 uppercase tracking-wide">{category}</p>
           
-          {/* Product Name */}
-          <h3 className="font-bold text-xl text-gray-900 line-clamp-2 mb-3 h-14 group-hover:text-green-700 transition-colors">{name}</h3>
+          {/* Product Name - Compact with proper line clamping */}
+          <h3 className="font-bold text-lg text-gray-900 line-clamp-2 mb-2 leading-tight group-hover:text-green-700 transition-colors">{name}</h3>
           
-          {/* Brand */}
-          <p className="text-base text-gray-600 mb-3 font-medium">by {brand}</p>
+          {/* Brand - Ensure it's visible and not cut off */}
+          <p className="text-sm text-gray-600 mb-2 font-medium truncate" title={`by ${brand}`}>by {brand}</p>
 
-          {/* Price with enhanced styling */}
+          {/* Price - More compact */}
           {price !== undefined && price !== null && (
-            <p className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-3">
+            <p className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent mb-2">
               ${price.toFixed(2)}
             </p>
           )}
           
-          {/* Date */}
+          {/* Date - Compact */}
           {date && (
-            <p className="text-sm text-gray-500 font-medium">
+            <p className="text-xs text-gray-500 font-medium">
               Certified: {date}
             </p>
           )}
         </div>
         
-        {/* Enhanced Action Buttons */}
-        <div className="space-y-3 mt-auto">
+        {/* Compact Action Buttons */}
+        <div className="space-y-2 mt-auto">
           <Button 
-            className="w-full bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white flex items-center justify-center gap-3 py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+            className="w-full bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white flex items-center justify-center gap-2 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-sm"
             asChild
           >
             <Link to={`/product/${id}`}>
-              <Eye className="h-5 w-5" /> View Details
+              <Eye className="h-4 w-4" /> View Details
             </Link>
           </Button>
           
           {affiliateLink && (
             <Button 
               variant="outline"
-              className="w-full border-2 border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-600 flex items-center justify-center gap-3 py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full border-2 border-green-500 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-600 flex items-center justify-center gap-2 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-sm"
               asChild
             >
               <a href={affiliateLink} target="_blank" rel="noopener noreferrer">
-                <ShoppingCart className="h-5 w-5" /> Buy Now
+                <ShoppingCart className="h-4 w-4" /> Buy Now
               </a>
             </Button>
           )}
 
           <Button 
             variant="outline"
-            className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 flex items-center justify-center gap-3 py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+            className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 flex items-center justify-center gap-2 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-sm"
             onClick={handleDownloadPdf}
             disabled={isDownloading}
           >
-            <Download className="h-5 w-5" /> 
+            <Download className="h-4 w-4" /> 
             {isDownloading ? 'Downloading...' : 'Download PDF'}
           </Button>
         </div>

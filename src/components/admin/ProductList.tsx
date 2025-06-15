@@ -37,50 +37,69 @@ export default function ProductList() {
     fetchProducts();
   };
 
+  const getStatusBadgeClass = (status: string) => {
+    switch (status) {
+      case "PASS":
+        return "bg-green-500 text-white";
+      case "FAIL":
+        return "bg-red-500 text-white";
+      case "EXPIRED":
+        return "bg-amber-500 text-white";
+      case "GOLD":
+        return "bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold";
+      default:
+        return "bg-gray-500 text-white";
+    }
+  };
+
   if (!products.length) return null;
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm max-w-3xl mx-auto mb-12">
-      <h3 className="font-medium text-lg mb-2">Recently Added Products</h3>
-      <table className="w-full text-sm">
-        <thead>
-          <tr>
-            <th className="text-left">Name</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(p => (
-            <tr key={p.id} className="border-t last:border-b">
-              <td>{p.name}</td>
-              <td>{p.brand}</td>
-              <td>{p.category}</td>
-              <td>
-                <Badge className={p.status === "PASS"
-                  ? "bg-green-500 text-white"
-                  : p.status === "FAIL"
-                    ? "bg-red-500 text-white"
-                    : "bg-amber-500 text-white"}>
-                  {p.status}
-                </Badge>
-              </td>
-              <td>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  title="Edit Product"
-                  onClick={() => handleEditClick(p)}
-                >
-                  <Edit className="w-5 h-5" />
-                </Button>
-              </td>
+    <div className="bg-white p-6 rounded-xl shadow-sm max-w-5xl mx-auto mb-12">
+      <h3 className="font-medium text-lg mb-4">Recently Added Products ({products.length} total)</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left py-2 px-2">Name</th>
+              <th className="text-left py-2 px-2">Brand</th>
+              <th className="text-left py-2 px-2">Category</th>
+              <th className="text-left py-2 px-2">Status</th>
+              <th className="text-left py-2 px-2">Date</th>
+              <th className="text-left py-2 px-2">Price</th>
+              <th className="text-center py-2 px-2">Edit</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map(p => (
+              <tr key={p.id} className="border-t hover:bg-gray-50">
+                <td className="py-2 px-2 max-w-xs">
+                  <div className="truncate" title={p.name}>{p.name}</div>
+                </td>
+                <td className="py-2 px-2">{p.brand}</td>
+                <td className="py-2 px-2">{p.category}</td>
+                <td className="py-2 px-2">
+                  <Badge className={getStatusBadgeClass(p.status)}>
+                    {p.status}
+                  </Badge>
+                </td>
+                <td className="py-2 px-2">{p.date || 'N/A'}</td>
+                <td className="py-2 px-2">{p.price ? `$${p.price}` : 'N/A'}</td>
+                <td className="py-2 px-2 text-center">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    title="Edit Product"
+                    onClick={() => handleEditClick(p)}
+                  >
+                    <Edit className="w-4 h-4" />
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {editProduct && (
         <EditProductModal
           product={editProduct}

@@ -66,7 +66,7 @@ const FeaturesSection = () => {
 
   return (
     <section id="features" className="section bg-gray-50">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-2 md:px-6 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
             Why We Test <span className="text-green-600">Your Supplements</span>
@@ -75,7 +75,7 @@ const FeaturesSection = () => {
             Protecting consumers through independent laboratory testing and transparent reporting.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
           {features.map((feature, index) => (
             <Feature
               key={index}

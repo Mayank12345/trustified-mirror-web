@@ -1,11 +1,11 @@
-
 import React, { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
-// NOTE: This is a DEMO/ADMIN tool. Remove after use for security!
+// NOTE: This is a DEMO/ADMIN tool.
+// ⚠️ This tool should NEVER be used in production. DO NOT re-add to Admin.tsx! ⚠️
 
 export default function ProductFieldQuickUpdater() {
   const [productId, setProductId] = useState("1");
@@ -29,7 +29,7 @@ export default function ProductFieldQuickUpdater() {
     if (error) {
       toast({
         title: "Error updating product",
-        description: error.message,
+        description: "An error occurred.",
       });
     } else {
       toast({
@@ -41,7 +41,9 @@ export default function ProductFieldQuickUpdater() {
 
   return (
     <form className="bg-orange-50 p-4 border border-orange-300 rounded mb-6" onSubmit={handleUpdate}>
-      <h3 className="font-semibold mb-3 text-orange-700">Quick Product Field Updater</h3>
+      <h3 className="font-semibold mb-3 text-orange-700">
+        Quick Product Field Updater (Demo tool: REMOVE in production!)
+      </h3>
       <div className="flex flex-col sm:flex-row gap-2 items-center">
         <Input
           placeholder="Product ID"
@@ -72,7 +74,9 @@ export default function ProductFieldQuickUpdater() {
           {loading ? "Updating..." : "Update"}
         </Button>
       </div>
-      <div className="mt-2 text-xs text-orange-700">⚠️ Remove this tool after you are done for security.</div>
+      <div className="mt-2 text-xs text-orange-700 font-bold">
+        ⚠️ This is a demo tool and should not be present in a production system! Remove before deploy.
+      </div>
     </form>
   );
 }

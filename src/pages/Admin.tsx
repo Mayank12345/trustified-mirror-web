@@ -7,25 +7,36 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import ProductFieldQuickUpdater from "@/components/admin/ProductFieldQuickUpdater";
-
-const DEMO_ADMIN_EMAIL = "admin@example.com"; // Replace with your demo/dev admin email
+// Removed ProductFieldQuickUpdater import for security
 
 // Main Admin Dashboard Page
 export default function AdminPage() {
   const { admin, session, loading } = useAdminAuth();
   const [mode, setMode] = useState<"LOGIN" | "DASH">("LOGIN");
-  const [email, setEmail] = useState(DEMO_ADMIN_EMAIL);
+  // Removed hardcoded DEMO_ADMIN_EMAIL for security
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // Quick login. (For demo/dev - replace with your flow)
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Minimal session cleanup for security
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith("supabase.auth.") || key.includes("sb-")) {
+        localStorage.removeItem(key);
+      }
+    });
+    Object.keys(sessionStorage || {}).forEach(key => {
+      if (key.startsWith("supabase.auth.") || key.includes("sb-")) {
+        sessionStorage.removeItem(key);
+      }
+    });
+
     const { error } = await supabase.auth.signInWithPassword({
       email, password,
     });
     if (error) {
-      toast({ title: "Login failed", description: error.message });
+      toast({ title: "Login failed", description: "Unable to login. Please check your credentials." });
     } else {
       toast({ title: "Login success", description: "Welcome!" });
       setMode("DASH");
@@ -33,6 +44,17 @@ export default function AdminPage() {
   };
 
   const handleLogout = async () => {
+    // Session cleanup for greater security
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith("supabase.auth.") || key.includes("sb-")) {
+        localStorage.removeItem(key);
+      }
+    });
+    Object.keys(sessionStorage || {}).forEach(key => {
+      if (key.startsWith("supabase.auth.") || key.includes("sb-")) {
+        sessionStorage.removeItem(key);
+      }
+    });
     await supabase.auth.signOut();
     window.location.reload();
   };
@@ -62,8 +84,8 @@ export default function AdminPage() {
             Logout
           </Button>
         </div>
-        {/* QUICK FIELD UPDATE TOOL FOR DEMO/TESTING */}
-        <ProductFieldQuickUpdater />
+        {/* REMOVED QUICK FIELD UPDATE TOOL FOR SECURITY */}
+        {/* <ProductFieldQuickUpdater /> */}
         <AddProductForm onAdd={() => {}} />
         <ProductList />
       </div>

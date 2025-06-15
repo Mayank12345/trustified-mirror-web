@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -24,21 +23,11 @@ export function useAdminAuth() {
   useEffect(() => {
     const checkAdmin = async () => {
       if (session?.user) {
-        console.log('Current user ID from auth:', session.user.id);
-        console.log('Current user email from auth:', session.user.email);
-        
-        // Check what's in admin_users table
-        const { data: allAdmins } = await supabase
-          .from('admin_users')
-          .select('id, email');
-        console.log('All admin_users in database:', allAdmins);
-        
         const { data } = await supabase
           .from('admin_users')
           .select('id, email')
           .eq('id', session.user.id)
           .single();
-        console.log('Admin lookup result:', data);
         setAdmin(data);
       } else {
         setAdmin(null);

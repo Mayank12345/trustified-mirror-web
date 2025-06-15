@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, ArrowRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/components/ui/use-toast';
 import { useRateLimit } from '@/hooks/useRateLimit';
@@ -63,80 +63,128 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-green-500 py-16">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold text-white mb-8">Connect with us.</h2>
-        {/* Email Subscription */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row max-w-md mx-auto mb-8"
-        >
-          <div className="flex-1 sm:mr-2 mb-2 sm:mb-0">
-            <SecureInput
-              type="email"
-              value={email}
-              onChange={setEmail}
-              placeholder="email@example.com"
-              required
-              maxLength={254}
-              disabled={loading || isLimited}
-              className="px-4 py-3 text-gray-700 bg-white border-0 rounded-l-lg sm:rounded-r-none"
-            />
+    <footer className="bg-gradient-to-br from-green-500 via-green-600 to-green-700 py-16 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-10 w-20 h-20 border border-white/20 rounded-full"></div>
+        <div className="absolute top-32 right-20 w-16 h-16 border border-white/20 rounded-full"></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 border border-white/20 rounded-full"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 text-center relative z-10">
+        <div className="max-w-2xl mx-auto">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Mail className="h-8 w-8 text-white" />
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
+              Stay Connected
+            </h2>
           </div>
-          <button
-            type="submit"
-            disabled={loading || isLimited}
-            className="bg-black text-white px-8 py-3 rounded-r-lg sm:rounded-l-none hover:bg-gray-800 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? "Joining..." : isLimited ? "Wait..." : "Join"}
-          </button>
-        </form>
-        
-        {/* Rate limit indicator */}
-        {isLimited && (
-          <p className="text-sm text-red-200 mb-4">
-            Rate limit reached. Please wait before submitting again.
+          <p className="text-green-100 text-lg mb-8 leading-relaxed">
+            Get the latest updates on product certifications and industry insights delivered to your inbox.
           </p>
-        )}
+          
+          {/* Enhanced Email Subscription Form */}
+          <form onSubmit={handleSubmit} className="mb-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-2 max-w-md mx-auto shadow-2xl border border-white/20">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <div className="flex-1">
+                  <div className="relative">
+                    <SecureInput
+                      type="email"
+                      value={email}
+                      onChange={setEmail}
+                      placeholder="Enter your email address"
+                      required
+                      maxLength={254}
+                      disabled={loading || isLimited}
+                      className="w-full px-6 py-4 text-gray-800 bg-white border-0 rounded-xl placeholder:text-gray-500 focus:ring-2 focus:ring-white/50 transition-all duration-200 text-lg"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  disabled={loading || isLimited}
+                  className="group bg-black text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition-all duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl flex items-center justify-center gap-2 min-w-[140px]"
+                >
+                  {loading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  ) : isLimited ? (
+                    "Wait..."
+                  ) : (
+                    <>
+                      Join Now
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+            
+            {/* Rate limit indicator */}
+            {isLimited && (
+              <div className="mt-4 p-3 bg-red-500/20 border border-red-400/30 rounded-lg backdrop-blur-sm">
+                <p className="text-sm text-red-100">
+                  Rate limit reached. Please wait before submitting again.
+                </p>
+              </div>
+            )}
+          </form>
+        </div>
         
-        {/* Contact Email and Social Media */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-white">
-          <p className="text-lg">
-            Email us at: support@trustified.in
-          </p>
-          <div className="flex space-x-4">
-            <a 
-              href="https://www.facebook.com/trustified.in" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-white hover:text-green-200 transition-colors"
-            >
-              <Facebook className="h-6 w-6" />
-            </a>
-            <a 
-              href="https://www.youtube.com/@Trustified-Certification" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-white hover:text-green-200 transition-colors"
-            >
-              <Youtube className="h-6 w-6" />
-            </a>
-            <a 
-              href="https://www.instagram.com/Trustified.in/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-white hover:text-green-200 transition-colors"
-            >
-              <Instagram className="h-6 w-6" />
-            </a>
+        {/* Contact Information & Social Media */}
+        <div className="border-t border-white/20 pt-12">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            {/* Contact Email */}
+            <div className="flex items-center gap-3 text-white">
+              <Mail className="h-5 w-5" />
+              <span className="text-lg font-medium">support@trustified.in</span>
+            </div>
+            
+            {/* Social Media Links */}
+            <div className="flex items-center gap-6">
+              <span className="text-white/80 text-sm font-medium">Follow us:</span>
+              <div className="flex space-x-4">
+                <a 
+                  href="https://www.facebook.com/trustified.in" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110"
+                  aria-label="Follow us on Facebook"
+                >
+                  <Facebook className="h-5 w-5 text-white group-hover:text-blue-300 transition-colors duration-200" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/@Trustified-Certification" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110"
+                  aria-label="Subscribe to our YouTube channel"
+                >
+                  <Youtube className="h-5 w-5 text-white group-hover:text-red-300 transition-colors duration-200" />
+                </a>
+                <a 
+                  href="https://www.instagram.com/Trustified.in/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110"
+                  aria-label="Follow us on Instagram"
+                >
+                  <Instagram className="h-5 w-5 text-white group-hover:text-pink-300 transition-colors duration-200" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {/* Copyright */}
-      <div className="bg-black py-4 mt-8">
+      
+      {/* Copyright Section */}
+      <div className="bg-black/30 backdrop-blur-sm mt-12 py-6 border-t border-white/10">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-white text-sm">
-            © 2024 ARPIT TRUSTIFIED CERTIFICATION PRIVATE LIMITED All rights reserved.
+          <p className="text-white/90 text-sm leading-relaxed">
+            © 2024 <span className="font-semibold">ARPIT TRUSTIFIED CERTIFICATION PRIVATE LIMITED</span>
+            <br className="sm:hidden" />
+            <span className="hidden sm:inline mx-2">•</span>
+            All rights reserved.
           </p>
         </div>
       </div>

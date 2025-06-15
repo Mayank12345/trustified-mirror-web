@@ -1,7 +1,7 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from "@/components/ui/button";
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -66,13 +66,6 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* Shop Button */}
-          <div className="hidden lg:flex items-center">
-            <Button className="bg-green-500 hover:bg-green-600 text-white px-7 py-2.5 rounded-full font-semibold flex items-center gap-2 shadow-sm transition min-w-[120px] h-12 focus-visible:ring-2 focus-visible:ring-green-600 focus:outline-none">
-              SHOP <ArrowRight size={18} />
-            </Button>
-          </div>
-
           {/* Mobile Hamburger */}
           <button
             className="lg:hidden p-2 rounded-md text-gray-700 transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400"
@@ -128,11 +121,6 @@ const Navbar = () => {
             >
               NMR REPORTS
             </Link>
-            <div className="pt-5 border-t mt-5">
-              <Button className="w-full bg-green-500 hover:bg-green-600 text-white rounded-full font-semibold flex items-center gap-2 justify-center text-lg py-3 h-12 min-w-[120px] focus-visible:ring-2 focus-visible:ring-green-600 focus:outline-none" onClick={toggleMobileMenu}>
-                SHOP <ArrowRight size={18} />
-              </Button>
-            </div>
           </div>
         </div>
       )}

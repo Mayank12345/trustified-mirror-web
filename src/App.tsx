@@ -13,6 +13,7 @@ import ProductDetail from "./pages/ProductDetail";
 import HowWeTest from "./pages/HowWeTest";
 import NotFound from "./pages/NotFound";
 import AdminPage from "./pages/Admin";
+import AccessibilityReport from "./pages/AccessibilityReport";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,9 @@ const App = () => {
           break;
         case "/how-we-test":
           title = "How We Test | Trustified";
+          break;
+        case "/accessibility-report":
+          title = "Accessibility Report | Trustified";
           break;
         default:
           if (path.startsWith("/product/")) {
@@ -75,6 +79,7 @@ const App = () => {
               <Route path="/how-we-test" element={<HowWeTest />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/admin" element={<AdminPage />} />
+              <Route path="/accessibility-report" element={<AccessibilityReport />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

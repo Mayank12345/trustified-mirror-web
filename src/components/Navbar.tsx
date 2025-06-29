@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import GlobalSearch from '@/components/ui/enhanced-search';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,7 +12,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto max-w-7xl px-4 xl:px-8">
         <nav
-          className="flex h-16 items-center justify-between"
+          className="flex h-16 items-center justify-between gap-4"
           aria-label="Main navigation"
         >
           {/* Logo */}
@@ -20,6 +20,11 @@ const Navbar = () => {
             <Link to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-green-500 rounded">
               <span className="text-2xl md:text-3xl font-extrabold text-gray-900">Trustified</span>
             </Link>
+          </div>
+
+          {/* Global Search - Desktop */}
+          <div className="hidden md:flex flex-1 max-w-md mx-4">
+            <GlobalSearch />
           </div>
 
           {/* Desktop Navigation */}
@@ -71,6 +76,7 @@ const Navbar = () => {
             className="lg:hidden p-2 rounded-md text-gray-700 transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400"
             onClick={toggleMobileMenu}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            style={{ minWidth: '44px', minHeight: '44px' }} // Ensure 44px touch target
           >
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -80,12 +86,18 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 top-16 bg-white z-40 border-t shadow-md animate-fade-in">
-          <div className="container mx-auto px-4 py-6 flex flex-col space-y-2 max-w-md">
+          <div className="container mx-auto px-4 py-6 flex flex-col space-y-4 max-w-md">
+            {/* Mobile Search */}
+            <div className="mb-4">
+              <GlobalSearch />
+            </div>
+            
             <Link
               to="/"
               className="px-3 py-3 text-lg font-semibold text-gray-900 hover:bg-green-50 rounded focus:bg-green-100 transition-colors focus-visible:ring-2 focus-visible:ring-green-500"
               onClick={toggleMobileMenu}
               tabIndex={0}
+              style={{ minHeight: '44px' }} // Ensure 44px touch target
             >
               ABOUT
             </Link>
@@ -94,6 +106,7 @@ const Navbar = () => {
               className="px-3 py-3 text-lg font-semibold text-gray-900 hover:bg-green-50 rounded focus:bg-green-100 transition-colors focus-visible:ring-2 focus-visible:ring-green-500"
               onClick={toggleMobileMenu}
               tabIndex={0}
+              style={{ minHeight: '44px' }}
             >
               PASS/FAIL
             </Link>
@@ -102,6 +115,7 @@ const Navbar = () => {
               className="px-3 py-3 text-lg font-semibold text-gray-900 hover:bg-green-50 rounded focus:bg-green-100 transition-colors focus-visible:ring-2 focus-visible:ring-green-500"
               onClick={toggleMobileMenu}
               tabIndex={0}
+              style={{ minHeight: '44px' }}
             >
               GOLD
             </Link>
@@ -110,6 +124,7 @@ const Navbar = () => {
               className="px-3 py-3 text-lg font-semibold text-gray-900 hover:bg-green-50 rounded focus:bg-green-100 transition-colors focus-visible:ring-2 focus-visible:ring-green-500"
               onClick={toggleMobileMenu}
               tabIndex={0}
+              style={{ minHeight: '44px' }}
             >
               GET CERTIFIED
             </Link>
@@ -118,6 +133,7 @@ const Navbar = () => {
               className="px-3 py-3 text-lg font-semibold text-gray-900 hover:bg-green-50 rounded focus:bg-green-100 transition-colors focus-visible:ring-2 focus-visible:ring-green-500"
               onClick={toggleMobileMenu}
               tabIndex={0}
+              style={{ minHeight: '44px' }}
             >
               NMR REPORTS
             </Link>

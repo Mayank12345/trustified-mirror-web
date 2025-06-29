@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
@@ -217,9 +216,9 @@ const PassAndFail = () => {
               </div>
             )}
 
-            {/* Enhanced Product Grid */}
+            {/* Enhanced Product Grid - Updated to show exactly 4 columns */}
             {!loading && !error && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 animate-fade-in">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-fade-in">
                 {filteredProducts.map((product, index) => (
                   <div 
                     key={product.id} 
